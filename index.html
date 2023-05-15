@@ -12,19 +12,24 @@
       content="default-src 'self'; script-src 'self'"
     />
     <title>Electron</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <h1>hola mundo</h1>
-    <h2>informacion de la aplicacion</h2>
-    <p id="info"></p>
-    <a href="main.html">Pagina main</a>
-    <p id="source"></p>
-    <button  type="button" id="darkmode">Dark Mode</button>
-    <button type="button" id="btn" class="btn btn-primary">presiona el boton</button>
+    <div class="container">
 
-    <div class="d-none" id="content">
-        <h1>Hola presionaste el boton</h1>
+      <h1>hola mundo</h1>
+      <h2>informacion de la aplicacion</h2>
+      <p id="info"></p>
+      <a href="main.html">Pagina main</a>
+      <p id="source"></p>
+      <button  type="button" id="darkmode" class="btn btn-primary">Dark Mode</button>
+      <button type="button" id="btn" class="btn btn-primary">presiona el boton</button>
+      <div class="d-none" id="content">
+          <h1>Hola presionaste el boton</h1>
+      </div>
+
     </div>
 
 </body>
