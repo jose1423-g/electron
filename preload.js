@@ -6,9 +6,13 @@ contextBridge.exposeInMainWorld('versions', {
   electron: () => process.versions.electron,
   ping: () => ipcRenderer.invoke('ping'),
   // también podemos exponer variables, no sólo funciones
-
 })
 
 contextBridge.exposeInMainWorld('darkMode', {
   toggle: () => ipcRenderer.invoke('darkmode:toggle')
+})
+
+contextBridge.exposeInMainWorld('data', {
+    respuesta: () => ipcRenderer.invoke('data:respuesta'),
+    hello: () => ipcRenderer.invoke('hello')
 })

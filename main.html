@@ -12,11 +12,27 @@
       content="default-src 'self'; script-src 'self'"
     />
     <title>Main</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
-    <h1>Bienvenido al Main</h1>
+  <div class="container">
+    
+      <h1 class="text-primary">Bienvenido al Main</h1>
+      <h2>informacion de la aplicacion</h2><br>
+      <p>Hit Alt+Shift+I on Windows, or Opt+Cmd+I on mac to see a message printed to the console.</p>
+      <p id="info"></p>
+      <a href="main.html">Pagina main</a>
+      <p id="source"></p>
+      <button  type="button" id="darkmode" class="btn btn-primary">Dark Mode</button>
+      <button type="button" id="btn" class="btn btn-primary">presiona el boton</button>
+      <div class="d-none" id="content">
+          <h1>Hola presionaste el boton</h1>
+      </div>
+    <a href="index.html">Vover al inicio</a>
+  </div>
 </body>
+  <script src="app.js"></script>
+  <script src="renderer.js"></script>
 </html>
