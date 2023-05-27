@@ -1,4 +1,4 @@
-:root {
+/* :root {
     color-scheme: light, dark;
 }
 @media (prefers-color-scheme: dark){
@@ -6,19 +6,18 @@
 }
 @media (prefers-color-scheme: light){
     body { background-color: #ddd; color: black; }
-}
+} 
 
-.d-none{
-    display: none;
+ipcMain.handle('darkmode:toggle', () => {
+  if (nativeTheme.shouldUseDarkColors) {
+      nativeTheme.themeSource = 'light'
+  } else {
+      nativeTheme.themeSource = 'dark'
+  }
+  return nativeTheme.shouldUseDarkColors
+})
+*/
+
+tbody, td{
+    padding: 0px;
 }
-/* .btn{
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    width: 10rem;
-}
-.btn-primary{
-    background-color: blue;
-    color: white;
-}
- */

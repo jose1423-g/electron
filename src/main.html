@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    /> -->
+    
+    <title>Admin</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body>
+
+  <div class="container-xl mt-3">
+      <div class="row">
+        <div class="col d-flex justify-content-center align-items-center mb-3">
+          <h1 class="me-2">Kiosko de Facturación</h1>
+          <img src="../img/logo-kisko.png" alt="logo" width="50px">
+        </div>
+      </div>
+      <form action="#" method="post" id="data-check">
+        <div class="row"> 
+          <div class="col-7">
+            <div class="row align-items-center mb-2">
+              <label for="RFC" class="form-label pe-0 col-sm-4">RFC:</label>
+              <div class="col">
+                <input type="text" class="form-control" id="RFC">
+                <div id="lista-rfc"></div>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="razon-social" class="form-label col-sm-4">Razon social:</label>
+              <div class="col">
+                <input type="text" class="form-control" id="razon-social">
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="cp" class="form-label col-sm-4">Codigo Postal:</label>
+              <div class="col">
+                <input type="text" class="form-control" id="cp">
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="regimen-fiscal" class="form-label col-sm-4">Regimen fiscal:</label>
+              <div class="col">
+                <select class="form-select" id="regimen-fiscal">
+                  <option value="1">601 - General de ley Personas Morales</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="usocfdi" class="form-label col-sm-4">Uso CFDI:</label>
+              <div class="col">
+                <select class="form-select" id="usocfdi">
+                  <option value="1">G03-Gastos Generales</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="email" class="form-label col-sm-4">Email:</label>
+              <div class="col">
+                <input type="email" class="form-control" id="email">
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="forma-pago" class="form-label col-sm-4">Forma de Pago:</label>
+              <div class="col">
+                <select class="form-select" id="forma-pago">
+                  <option value="1">G03-Gastos Generale</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+            <div class="row align-items-center mb-2">
+              <label for="Observaciones" class="form-label col-sm-4">Observaciones:</label>
+              <div class="col">
+                <textarea class="form-control" id="Observaciones"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="mb-2">
+              <label for="referencia" class="form-label">Teclee o escanee su referencia</label>
+              <input type="text" class="form-control" id="referencia">
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Referencia</th>
+                  <th scope="col">Importe</th>
+                  <th scope="col">Remover</th>
+                </tr>
+              </thead>
+              <tbody id="lista_tickets_all">
+                <!-- <button type="button" class="delete_ticket" id="btn-delete">holis</button>
+                <button type="button" class="delete_ticket" id="btn-delete">holis</button>
+                <button type="button" class="delete_ticket" id="btn-delete">holis</button>
+                <button type="button" class="delete_ticket" id="btn-delete">holis</button> -->
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+     
+      <a href="index.html">Volver</a>
+  </div>
+
+</body>
+  <script src="../data-check.js"></script>
+</html>

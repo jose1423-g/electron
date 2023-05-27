@@ -8,11 +8,19 @@ contextBridge.exposeInMainWorld('versions', {
   // también podemos exponer variables, no sólo funciones
 })
 
-contextBridge.exposeInMainWorld('darkMode', {
-  toggle: () => ipcRenderer.invoke('darkmode:toggle')
+contextBridge.exposeInMainWorld('files', {
+  print: (url) => ipcRenderer.invoke('files:print', url),
 })
 
-contextBridge.exposeInMainWorld('data', {
+/* contextBridge.exposeInMainWorld('login', {
+  acceso: () => ipcRenderer.invoke('acceso')
+}) */
+
+/* contextBridge.exposeInMainWorld('darkMode', {
+  toggle: () => ipcRenderer.invoke('darkmode:toggle')
+}) */
+
+/* contextBridge.exposeInMainWorld('data', {
     respuesta: () => ipcRenderer.invoke('data:respuesta'),
     hello: () => ipcRenderer.invoke('hello')
-})
+}) */

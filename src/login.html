@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    /> -->
+    
+    <title>login</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body>
+
+  <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form action="#">
+                    <h1 class="text-primary text-center">GASOFAC</h1>
+                    <h2 class="text-center text-primary mb-3">Facturación web de combustible</h2>
+                    <div class="mb-3">
+                        <label for="pass" class="form-label">Contraseña</label>  
+                        <input type="password" class="form-control" id="pass">
+                    </div>
+                    <button type="button" id="btn-enviar" class="btn btn-primary">enviar</button>
+                </form>
+            </div>
+        </div>
+        <a href="index.html">volver</a>
+        <button type="click" class="btn btn-danger" id="imprimir">Imprimir</button>
+  </div>
+
+  <script src="../login.js"></script>
+</body>
+</html>

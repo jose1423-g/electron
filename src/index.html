@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Kisko</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+<body>
+    <div class="container mt-5">
+        
+        <div class="row justify-content-center">
+            <div class="col-12 d-flex justify-content-center align-items-center mb-4">
+                <h1 class="me-2">Kiosko de Facturación</h1>
+                <img src="../img/logo-kisko.png" alt="logo" width="50px" id="logo-kisko">
+            </div>
+
+            <div class="col-12 mb-4">
+                <h2 class="text-center text-primary">Bienvenido a la estación de servicio <span id="datos-estacion">estacion 230</span></h2>
+            </div>
+
+            <div class="col-8 mb-5">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" id="">Teclee o escanee su referencia <span class="ms-2" id="">info</span></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                </form>
+                <a href="main.html">Main</a>
+            </div>
+
+            <div class="col-12 text-center">
+                <img src="../img/logo-gas.PNG" alt="logo-gasofac" width="450px">
+            </div>
+        </div>
+    </div>
+    
+    <script src="../renderer.js"></script>
+</body>
+</html>

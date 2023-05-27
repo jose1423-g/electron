@@ -1,45 +1,46 @@
-const btn = document.getElementById('btn')
-const content = document.getElementById('content')
-btn.addEventListener('click', function () {
-    if (content.className == 'd-none') {
-        content.classList.remove('d-none')          
-    } else {
-        content.classList.add('d-none')          
-    }
+const dbclick = document.getElementById('logo-kisko')
+
+dbclick.addEventListener('dblclick', function () {
+    window.location.href = "login.html"  
 })
 
-document.getElementById('darkmode').addEventListener('click', async () => {
+
+
+
+
+
+
+
+
+
+/* document.getElementById('darkmode').addEventListener('click', async () => {
     const isDark = await window.darkMode.toggle()
-    document.getElementById('source').innerHTML = isDark ? 'dark' : 'light'
-})
-
-/* document.getElementById('boton').addEventListener('click', async () => {
-    const datos = await window.data.respuesta()
-    console.log(datos);
+    // document.getElementById('source').innerHTML = isDark ? 'dark' : 'light'
 }) */
 
-document.getElementById('boton').addEventListener('click', function () {    
-    datos_json();
-    console.log("click basico");
+/* function hola(){
+    console.log("holis diste click");
+}
 
-})
+document.getElementById('btn').addEventListener('click', function () { 
+    console.log("holis diste click");
+}) */
 
-const information = document.getElementById('info')
-information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
+/* const information = document.getElementById('info')
+information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})` */
 
-const func = async () => {
+/* const func = async () => {
     const response = await window.versions.ping()
     console.log(response); // prints out 'pong'
 }
-func()
+func() */
 
-const holis = async () => {
-    const response = await window.data.hello()
-    console.log(response); // prints out 'pong'
-}
-holis()
+/* document.getElementById('darkmode').addEventListener('click', async () => {
+    const isDark = await window.darkMode.toggle()
+    document.getElementById('source').innerHTML = isDark ? 'dark' : 'light'
+}) */
 
-function datos_json (){
+/* function datos_json (){
 const data = {
     method: 'GET'
 };
@@ -49,9 +50,4 @@ fetch('https://gasofac.mx/ria/cte.php?query=XAXX010101000&f_name=rcpClienteExact
         console.log("fetch");
         console.log(datos);
     })
-}
-
-
-
-
-
+} */
