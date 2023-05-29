@@ -21,3 +21,14 @@ ipcMain.handle('darkmode:toggle', () => {
 tbody, td{
     padding: 0px;
 }
+.content-list-rfc{
+    width: 30rem;
+    height: 300px;
+}
+.content-referencia{
+    width: auto;
+    max-height: 150px;
+}
+.none{
+    display: none;
+}

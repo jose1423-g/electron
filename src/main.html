@@ -9,11 +9,11 @@
     /> -->
     
     <title>Admin</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
 </head>
-<body>
+<body id="body">
 
   <div class="container-xl mt-3">
       <div class="row">
@@ -24,94 +24,146 @@
       </div>
       <form action="#" method="post" id="data-check">
         <div class="row"> 
-          <div class="col-7">
+
+          <div class="col-6 ps-3 pe-0">
+
             <div class="row align-items-center mb-2">
               <label for="RFC" class="form-label pe-0 col-sm-4">RFC:</label>
-              <div class="col">
+              <div class="col-7">
                 <input type="text" class="form-control" id="RFC">
-                <div id="lista-rfc"></div>
+                <div class="content-list-rfc position-absolute overflow-auto bg-white none" id="container-rfc">
+                  <ul class="list-group list-group-flush" id="lista-rfc"></ul>
+                </div>
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
-              <label for="razon-social" class="form-label col-sm-4">Razon social:</label>
-              <div class="col">
-                <input type="text" class="form-control" id="razon-social">
+              <label for="RazonSocial" class="form-label col-sm-4">Razon social:</label> 
+              <div class="col-7">
+                <input type="text" class="form-control" id="RazonSocial">
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
-              <label for="cp" class="form-label col-sm-4">Codigo Postal:</label>
-              <div class="col">
-                <input type="text" class="form-control" id="cp">
+              <label for="CodigoPostal" class="form-label col-sm-4">Codigo Postal:</label>
+              <div class="col-7">
+                <input type="text" class="form-control" id="CodigoPostal">
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
-              <label for="regimen-fiscal" class="form-label col-sm-4">Regimen fiscal:</label>
-              <div class="col">
-                <select class="form-select" id="regimen-fiscal">
-                  <option value="1">601 - General de ley Personas Morales</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+              <label for="CdCfdiRegimen" class="form-label col-sm-4">Regimen fiscal:</label>
+              <div class="col-7">
+                <select class="form-select" id="CdCfdiRegimen">
+                  <option value="601">601 - General de Ley Personas Morales</option>
+                  <option value="603">603 - Personas Morales con Fines no Lucrativos</option>
+                  <option value="605">605 - Sueldos y Salarios e Ingresos Asimilados a Salarios</option>
+                  <option value="606">606 - Arrendamiento</option>
+                  <option value="607">607 - Régimen de Enajenación o Adquisición de Bienes</option>
+                  <option value="608">608 - Demás ingresos</option>
+                  <option value="610">610 - Residentes en el Extranjero sin Establecimiento Permanente en México</option>
+                  <option value="611">611 - Ingresos por Dividendos (socios y accionistas)</option>
+                  <option value="612">612 - Personas Físicas con Actividades Empresariales y Profesionales</option>
+                  <option value="614">614 - Ingresos por intereses</option>
+                  <option value="615">615 - Régimen de los ingresos por obtención de premios</option>
+                  <option value="616">616 - Sin obligaciones fiscales</option>
+                  <option value="620">620 - Sociedades Cooperativas de Producción que optan por diferir sus ingresos</option>
+                  <option value="621">621 - Incorporación Fiscal</option>
+                  <option value="622">622 - Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras</option>
+                  <option value="623">623 - Opcional para Grupos de Sociedades</option>
+                  <option value="624">624 - Coordinados</option>
+                  <option value="625">625 - Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas</option>
+                  <option value="626">626 - Régimen Simplificado de Confianza</option>						
                 </select>
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
-              <label for="usocfdi" class="form-label col-sm-4">Uso CFDI:</label>
-              <div class="col">
-                <select class="form-select" id="usocfdi">
-                  <option value="1">G03-Gastos Generales</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+              <label for="CdUsoCfdiFijo" class="form-label col-sm-4">Uso CFDI:</label>
+              <div class="col-7">
+                <select class="form-select" id="CdUsoCfdiFijo">
+                  <option value="CN01">CN01 - Nómina</option>
+                  <option value="CP01">CP01 - Pagos</option>
+                  <option value="D01">D01 - Honorarios médicos, dentales y gastos hospitalarios.</option>
+                  <option value="D02">D02 - Gastos médicos por incapacidad o discapacidad.</option>
+                  <option value="D03">D03 - Gastos funerales.</option>
+                  <option value="D04">D04 - Donativos.</option>
+                  <option value="D05">D05 - Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación).</option>
+                  <option value="D06">D06 - Aportaciones voluntarias al SAR.</option>
+                  <option value="D07">D07 - Primas por seguros de gastos médicos.</option>
+                  <option value="D08">D08 - Gastos de transportación escolar obligatoria.</option>
+                  <option value="D09">D09 - Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones.</option>
+                  <option value="D10">D10 - Pagos por servicios educativos (colegiaturas).</option>
+                  <option value="G01">G01 - Adquisición de mercancías.</option>
+                  <option value="G02">G02 - Devoluciones, descuentos o bonificaciones.</option>
+                  <option value="G03" selected="">G03 - Gastos en general.</option>
+                  <option value="I01">I01 - Construcciones.</option>
+                  <option value="I02">I02 - Mobiliario y equipo de oficina por inversiones.</option>
+                  <option value="I03">I03 - Equipo de transporte.</option>
+                  <option value="I04">I04 - Equipo de computo y accesorios.</option>
+                  <option value="I05">I05 - Dados, troqueles, moldes, matrices y herramental.</option>
+                  <option value="I06">I06 - Comunicaciones telefónicas.</option>
+                  <option value="I07">I07 - Comunicaciones satelitales.</option>
+                  <option value="I08">I08 - Otra maquinaria y equipo.</option>
+                  <option value="S01">S01 - Sin efectos fiscales.</option>
                 </select>
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
-              <label for="email" class="form-label col-sm-4">Email:</label>
-              <div class="col">
-                <input type="email" class="form-control" id="email">
+              <label for="Email" class="form-label col-sm-4">Email:</label>
+              <div class="col-7">
+                <input type="email" class="form-control" id="Email">
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
-              <label for="forma-pago" class="form-label col-sm-4">Forma de Pago:</label>
-              <div class="col">
-                <select class="form-select" id="forma-pago">
-                  <option value="1">G03-Gastos Generale</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+              <label for="FormaPagoFija" class="form-label col-sm-4">Forma de Pago:</label>
+              <div class="col-7">
+                <select class="form-select" id="FormaPagoFija">
+                  <option value="01">01-Efectivo</option>
+                  <option value="02">02-Cheque Nominativo</option>
+                  <option value="03">03-Transferencia electronica de fondos</option>
+                  <option value="04">04-Tarjeta de credito</option>
+                  <option value="28">28-Tarjeta de debito</option>
+                  <option value="29">29-Tarjeta de servicio</option>
+                  <option value="99">99-Por definir</option>
                 </select>
               </div>
             </div>
+
             <div class="row align-items-center mb-2">
               <label for="Observaciones" class="form-label col-sm-4">Observaciones:</label>
-              <div class="col">
+              <div class="col-7">
                 <textarea class="form-control" id="Observaciones"></textarea>
               </div>
             </div>
+
           </div>
-          <div class="col-4">
+
+          <div class="col-5">
+          
             <div class="mb-2">
               <label for="referencia" class="form-label">Teclee o escanee su referencia</label>
               <input type="text" class="form-control" id="referencia">
             </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Referencia</th>
-                  <th scope="col">Importe</th>
-                  <th scope="col">Remover</th>
-                </tr>
-              </thead>
-              <tbody id="lista_tickets_all">
-                <!-- <button type="button" class="delete_ticket" id="btn-delete">holis</button>
-                <button type="button" class="delete_ticket" id="btn-delete">holis</button>
-                <button type="button" class="delete_ticket" id="btn-delete">holis</button>
-                <button type="button" class="delete_ticket" id="btn-delete">holis</button> -->
 
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-7">Referencia</div>
+              <div class="col-3">Importe</div>
+              <div class="col-2">Remover</div>
+            </div>
+            <div class="row mt-2 content-referencia overflow-auto" id="lista_tickets_all"></div>
+            <div class="d-flex mt-3 mb-3">
+              <p class="me-5"><strong class="me-2">Comprobantes</strong>(<strong id="comprobantes">0</strong>)</p>
+              <p class=""><strong class="me-2">Total: $</strong><strong id="total">0.00</strong></p>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary" id="generar_factura">Generar factura</button>
+            </div>
           </div>
         </div>
       </form>
-     
       <a href="index.html">Volver</a>
   </div>
 
