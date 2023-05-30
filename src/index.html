@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
     <title>Kisko</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
@@ -26,21 +22,27 @@
             </div>
 
             <div class="col-8 mb-5">
-                <form action="" method="post">
+                <!-- <form action="#" method="post"> -->
                     <div class="mb-3">
-                        <label class="form-label" id="">Teclee o escanee su referencia <span class="ms-2" id="">info</span></label>
-                        <input type="text" class="form-control" id="">
+                        <label class="form-label" for="referencia_index">Teclee o escanee su referencia <span class="ms-2" id="">info</span></label>
+                        <input type="text" class="form-control" id="referencia_index">
                     </div>
-                </form>
+                <!-- </form> -->
                 <a href="main.html">Main</a>
+                <input type="text" class="form-control referencia_index" id="btn">
             </div>
+           <div id="referencia"></div>
+           <div id="RFC"></div>
+           <div id="body"></div>
 
             <div class="col-12 text-center">
                 <img src="../img/logo-gas.PNG" alt="logo-gasofac" width="450px">
             </div>
         </div>
     </div>
-    
-    <script src="../renderer.js"></script>
+
 </body>
+    <script src="../renderer.js"></script>
+  <script src="../data-check.js"></script>
+
 </html>
