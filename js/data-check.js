@@ -24,13 +24,16 @@ let total = document.getElementById('total')
 let referencia_index = document.getElementById('referencia_index')
 let val_referencia_index = document.getElementById('referencia_index')
 let btn  = document.getElementById('btn')
+let a_referencia = document.getElementById('a_referencia_clean')
+let billing_form = document.getElementById('billing_form')
+let generar_factura = document.getElementById('generar_factura')
+const imprimir = document.getElementById('imprimir')
 
 
 
 document.addEventListener('DOMContentLoaded', function() {
     
     var queryParameters = new URLSearchParams(window.location.search);
-
     var array_all = queryParameters.get('a_tickets_all');
     var array_total = queryParameters.get('a_total');
     var array_clean = queryParameters.get('a_ticket_clean')
@@ -38,18 +41,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var array1 = JSON.parse(array_all);
     var array2 = JSON.parse(array_total);
     var array3 = JSON.parse(array_clean)
-        var valor_ticket_all = array1[0].toString()
-        var valor_total = array2[0].toString()
-        var valor_clean = array3[0].toString()
-        a_tickets_all.push(valor_ticket_all)
-        a_total.push(valor_total)
-        a_ticket_clean.push(valor_clean)
-        show_tickets()
-        show_total()
 
+    var valor_ticket_all = array1[0].toString()
+    var valor_total = array2[0].toString()
+    var valor_clean = array3[0].toString()
+    a_tickets_all.push(valor_ticket_all)
+    a_total.push(valor_total)
+    a_ticket_clean.push(valor_clean)
+
+    show_tickets()
+    show_total()
+    show_tickets_clean()
 });
-
-//get referencia del index
+//get referencia del INDEX
 if (referencia_index) {
     referencia_index.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
@@ -67,43 +71,47 @@ if (referencia_index) {
         }        
     })    
 }
-
-//get referencia
-referencia.addEventListener('keypress', function (event) {
-    if(event.key === "Enter"){
-        re = /-/g;
-        referencia_clean = val_referencia.value.replace(re,'')
-        if (a_ticket_clean.includes(referencia_clean)) {
-            alert("La referencia "+referencia_clean+" ya esta ingresada")
-            referencia.value = "";
-        } else {
-            a_ticket_clean.push(referencia_clean)
-        }  
-        datacheck()    
-        referencia.value = "";      
-    }
-})
-
-rfc.addEventListener('keypress', function (event) {
-    if(event.key === "Enter"){
-        rfc = val_rfc.value
-        if (rfc.length >= 7) {
-            datarfc()
-            get_uso_cfdi()
-            get_regimen_fiscal()
-            container_rfc.classList.remove("none");
-            body.classList.add("body-content")
-
-        } else {
-            // oculatar la lista ?
-            console.log("no son 7 caracteres :(")
+//get referencia MAIN
+if (referencia) {
+    referencia.addEventListener('keypress', function (event) {
+        if(event.key === "Enter"){
+            re = /-/g;
+            referencia_clean = val_referencia.value.replace(re,'')
+            if (a_ticket_clean.includes(referencia_clean)) {
+                alert("La referencia "+referencia_clean+" ya esta ingresada")
+                referencia.value = "";
+            } else {
+                a_ticket_clean.push(referencia_clean)
+                show_tickets_clean()
+            }  
+            datacheck()    
+            referencia.value = "";      
         }
-    }
-})
+    })
+}
+//get RFC
+if (rfc) {    
+    rfc.addEventListener('keypress', function (event) {
+        if(event.key === "Enter"){
+            rfc = val_rfc.value
+            if (rfc.length >= 7) {
+                datarfc()
+                get_uso_cfdi()
+                get_regimen_fiscal()
+                container_rfc.classList.remove("none");
+                body.classList.add("body-content")
 
+            } else {
+                // oculatar la lista ?
+                console.log("no son 7 caracteres :(")
+            }
+        }
+    })
+}
 // crear un evento que al darle click oculte la lista-rfc al darle click al body
-body.addEventListener('click', remove_class)
-
+if (body) {
+    body.addEventListener('click', remove_class)
+}
 // delete referencia
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('delete_ticket')) {
@@ -113,7 +121,6 @@ document.addEventListener('click', function(event) {
         delete_total(valor)
     }
 });
-
 //get data-id del rfc
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('click-rfc')) {
@@ -121,9 +128,40 @@ document.addEventListener('click', function(event) {
         getdataidrfc(valor) 
     }
 });
-
+//Genera la factura/ envio del formulario
+if (generar_factura) {
+    generar_factura.addEventListener('click', function () {
+        const formdata = new FormData(billing_form);
+        fetch('https://gasofac.mx/ria/solicitar-factura.php', {
+            method: 'POST',
+            body: formdata
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Maneja la respuesta del servidor
+            respuesta = data.result;
+            if (respuesta == 1) {
+                window.location.href = "timbrado.html"
+            } else {
+                console.log("Error al generar la factura");
+            }
+        })
+        .catch(error => {
+            // Maneja errores de la solicitud
+            console.error(error);
+        });
+    })
+}
+if (imprimir) {
+    imprimir.addEventListener('click', printer)
+}
 //FUNCIONES
-
+//muestra en el input de tipo hidden las referencias
+function  show_tickets_clean() {
+    let a_data_clean = a_ticket_clean.join(',')
+    a_referencia.value = a_data_clean
+}
+//valida la referencia ingresada en el INDEX
 function val_datacheck() {
     let referencia = document.getElementById('referencia_index').value
 
@@ -144,13 +182,8 @@ function val_datacheck() {
         if (ret == 1) {
             let total = myjson.Total
             let dato = '<div class="col-7 mt-2">'+myjson.Ticket_ori+'</div><div class="col-3 mt-2">'+myjson.Total+'</div>'
-            // let re = /-/g;
-            // let referencia_clean = referencia.replace(re,'')
-
-            // a_ticket_clean.push(referencia_clean)
             a_tickets_all.push(dato)
             a_total.push(total)
-
             //convierte el array en string
             var array_all = JSON.stringify(a_tickets_all);
             var array_total = JSON.stringify(a_total);
@@ -161,10 +194,8 @@ function val_datacheck() {
         } else {
             console.log("Ups algo salio mal")
         }
-        
     });
 }
-
 //get datos de la referencia
 function datacheck() {
     let referencia = document.getElementById('referencia').value
@@ -194,7 +225,6 @@ function datacheck() {
         
     });
 }
-
 //get datos del rfc
 function datarfc() {
     let  RFC = document.getElementById('RFC').value
@@ -213,13 +243,12 @@ function datarfc() {
     }).then(json => {
         lista = "";
         for (let index = 0; index < json.length; index++) {
-            const element = '<li class="list-group-item"><a href="#" class="click-rfc" data-id="'+json[index].Nombre+','+json[index].Email+','+json[index].FormaPagoFija+','+json[index].CdUsoCfdiFijo+','+json[index].CodigoPostal+','+json[index].CdCfdiRegimen+'">'+json[index].NombreDisplay+'</a></li>'
+            const element = '<li class="list-group-item"><a href="#" class="click-rfc nav-link" data-id="'+json[index].Nombre+','+json[index].Email+','+json[index].FormaPagoFija+','+json[index].CdUsoCfdiFijo+','+json[index].CodigoPostal+','+json[index].CdCfdiRegimen+'">'+json[index].NombreDisplay+'</a></li>'
             lista += element 
         }
         lista_rfc.innerHTML = lista        
     });
 }
-
 //get uso de cfdi
 function get_uso_cfdi() {
     let  RFC = document.getElementById('RFC').value
@@ -243,7 +272,6 @@ function get_uso_cfdi() {
         uso_cfdi.innerHTML = cfdi       
     });
 }
-
 //get regimen fiscal
 function  get_regimen_fiscal() {
     let  RFC = document.getElementById('RFC').value
@@ -267,7 +295,6 @@ function  get_regimen_fiscal() {
         regimen_fiscal.innerHTML = lista        
     });
 }
-
 //muestra los tikects
 function show_tickets() {
     let datos_lista = ""; 
@@ -289,13 +316,11 @@ function show_total() {
     }
     total.innerHTML =  suma.toFixed(2)
 }
-
 // elimina los datos del array a_tickets_all
 function delete_all(valor) {
     a_tickets_all.splice(valor,1)
     show_tickets()
 }
-
 //elimina los datos del array a_ticket_clean
 function delete_clean(valor) {
     a_ticket_clean.splice(valor, 1)
@@ -311,7 +336,7 @@ function remove_class() {
     body_click.classList.toggle("body-content")
     container_rfc.classList.add("none")
 }
-//obtiene los valores correpondientes al rfc
+//obtiene los valores correpondientes al rfc y los muestra en los inputs
 function  getdataidrfc(valor) {
     datos = valor.split(',')
     const RazonSocial = datos[0].trim(); //Nombre
@@ -328,10 +353,9 @@ function  getdataidrfc(valor) {
     email.value = Email
     forma_pago_fija.value = FormaPagoFija
 }
-
-/* for (let i = 0; i < a_ticket_all.length; i++) {
-        const element = a_ticket_all[i];
-        console.log("datos  "+element);
-        console.log("referencia del input "+referencia.value);
-    } */
-// JSON.stringify({'f_name':'ticketValidate','ticket':referencia,'tickets_all':'00052007700000E4', 'apc':'AUT'})
+//funcion para imprimir  asyncrona
+async function printer(){
+    const url = "https://gasofac.mx/reportes/factura_electronica_t.php?IdFactura=2772915&is_show=1";
+    const print = await window.files.print(url)
+    console.log("hey :)"+print)
+}

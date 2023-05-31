@@ -1,6 +1,10 @@
 const { fail } = require('assert')
 const { app, BrowserWindow, ipcMain, webContents, Menu} = require('electron')
 const path = require('path')
+const express = require('express');
+const fs = require('fs');
+const expressApp = express();
+const port = 3000;
 // const connection = require('./app.js') conexion a db
 
 var options = {
@@ -27,7 +31,7 @@ const createindexWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     },
   })
-  index.loadFile('./src/index.html')
+  index.loadFile('./view/index.html')
 
   const template = [
     {
@@ -69,6 +73,7 @@ ipcMain.handle('files:print',(event, url) => {
   createprintWindow(url)
   return "holis si jalo"; 
 })
+
 
 app.whenReady().then(() => { 
   createindexWindow()
