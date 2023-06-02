@@ -1,53 +1,34 @@
 const dbclick = document.getElementById('logo-kisko')
+const logo  = document.getElementById('logo-gasofac')
+const texto_bienvenida  = document.getElementById('texto-bienvenida')
+const icon = document.getElementById('info')
 
 dbclick.addEventListener('dblclick', function () {
     window.location.href = "login.html"  
 })
 
+icon.addEventListener('click', info)
 
-
-
-
-
-
-
-
-
-/* document.getElementById('darkmode').addEventListener('click', async () => {
-    const isDark = await window.darkMode.toggle()
-    // document.getElementById('source').innerHTML = isDark ? 'dark' : 'light'
-}) */
-
-/* function hola(){
-    console.log("holis diste click");
+function info() {
+    // console.log("diste click al info")
 }
 
-document.getElementById('btn').addEventListener('click', function () { 
-    console.log("holis diste click");
-}) */
+function datos() {
+    fetch("../config.json", {
+        method: 'POST',
+    }).then(function(data) {
+        return data.json()  
+    }).then(json => {
+        var file = ""
+        var bienvenida = ""
+        for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            file  = element.file
+            bienvenida = element.TextoBienvenida+''+element.Estacion
+        }
+        texto_bienvenida.innerHTML = bienvenida
+        logo.src = file
 
-/* const information = document.getElementById('info')
-information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})` */
-
-/* const func = async () => {
-    const response = await window.versions.ping()
-    console.log(response); // prints out 'pong'
+    });
 }
-func() */
-
-/* document.getElementById('darkmode').addEventListener('click', async () => {
-    const isDark = await window.darkMode.toggle()
-    document.getElementById('source').innerHTML = isDark ? 'dark' : 'light'
-}) */
-
-/* function datos_json (){
-const data = {
-    method: 'GET'
-};
-fetch('https://gasofac.mx/ria/cte.php?query=XAXX010101000&f_name=rcpClienteExacto&app=autofactura_web', data)
-    .then(response => response.json())
-    .then(datos => {
-        console.log("fetch");
-        console.log(datos);
-    })
-} */
+onload = datos

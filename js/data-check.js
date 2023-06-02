@@ -29,6 +29,11 @@ let billing_form = document.getElementById('billing_form')
 let generar_factura = document.getElementById('generar_factura')
 const imprimir = document.getElementById('imprimir')
 
+const alert_index = document.getElementById('alert_index')
+const alert_info = document.getElementById('alert_info')
+const alert_warning = document.getElementById('alert_warning')
+
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -42,9 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var array2 = JSON.parse(array_total);
     var array3 = JSON.parse(array_clean)
 
-    var valor_ticket_all = array1[0].toString()
+    var valor_ticket_all = array1[0].toString()          
     var valor_total = array2[0].toString()
     var valor_clean = array3[0].toString()
+
     a_tickets_all.push(valor_ticket_all)
     a_total.push(valor_total)
     a_ticket_clean.push(valor_clean)
@@ -61,7 +67,6 @@ if (referencia_index) {
         referencia_clean = val_referencia_index.value.replace(re,'')
 
         if (a_ticket_clean.includes(referencia_clean)) {
-            alert("Referencia no es valida")
             referencia_index.value = "";
         } else {
             a_ticket_clean.push(referencia_clean)
@@ -100,10 +105,13 @@ if (rfc) {
                 get_regimen_fiscal()
                 container_rfc.classList.remove("none");
                 body.classList.add("body-content")
-
             } else {
-                // oculatar la lista ?
-                console.log("no son 7 caracteres :(")
+                container_rfc.classList.add("none")
+                alert_info.innerHTML = 'Debe ingresar al menos 7 caracteres'
+                alert_info.classList.remove('none')
+                setTimeout( function () {
+                    alert_info.classList.add('none')                
+                }, 3000)
             }
         }
     })
@@ -138,16 +146,18 @@ if (generar_factura) {
         })
         .then(response => response.json())
         .then(data => {
-            // Maneja la respuesta del servidor
             respuesta = data.result;
             if (respuesta == 1) {
                 window.location.href = "timbrado.html"
             } else {
-                console.log("Error al generar la factura");
+                alert_warning.innerHTML = 'Error al generar la factura'
+                alert_warning.classList.remove('none')
+                setTimeout( function () {
+                    alert_info.classList.add('none')                
+                }, 5000)
             }
         })
         .catch(error => {
-            // Maneja errores de la solicitud
             console.error(error);
         });
     })
@@ -192,7 +202,11 @@ function val_datacheck() {
             var arrayQueryString = '?a_tickets_all=' + encodeURIComponent(array_all) + '&a_total=' + encodeURIComponent(array_total) + '&a_ticket_clean=' + encodeURIComponent(array_clean);
             window.location.href = 'main.html' + arrayQueryString;            
         } else {
-            console.log("Ups algo salio mal")
+            alert_index.innerHTML = 'La referencia no es valida'
+            alert_index.classList.remove('none')
+            setTimeout( function () {
+                alert_index.classList.add('none')
+            }, 3000) 
         }
     });
 }
@@ -220,7 +234,11 @@ function datacheck() {
             show_tickets()  
             show_total()      
         } else {
-            console.log("Ups algo salio mal")
+            alert_info.innerHTML = 'La referencia no es valida'
+            alert_info.classList.remove('none')
+            setTimeout( function () {
+                alert_info.classList.add('none')                
+            }, 3000)
         }
         
     });
@@ -356,6 +374,6 @@ function  getdataidrfc(valor) {
 //funcion para imprimir  asyncrona
 async function printer(){
     const url = "https://gasofac.mx/reportes/factura_electronica_t.php?IdFactura=2772915&is_show=1";
-    const print = await window.files.print(url)
+    const print = await window.dataprint.print(url)
     console.log("hey :)"+print)
 }

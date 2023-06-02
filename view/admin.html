@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    
+    <meta charset="UTF-8" />    
     <title>Kisko</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
@@ -20,57 +18,61 @@
         <form action="#" method="post" id="form_admin">
             <div class="row"> 
                 <div class="col ps-3 pe-0">
+
                     <h3 class="text-primary">General</h3>
+                    
                     <div class="row align-items-center mb-2">
                         <label for="TextoBienvenida" class="form-label pe-0 col-sm-4">Texto de bienvenida</label>
-                        <div class="col-7">
+                        <div class="col-8">
                             <textarea class="form-control" id="TextoBienvenida" name="TextoBienvenida"></textarea>
                         </div>
                     </div>
 
                     <div class="row align-items-center mb-2">
                         <label for="logo" class="form-label col-sm-4">Logo o imagen publicitaria</label> 
-                        <div class="col-7">
+                        <div class="col-8">
                             <input type="file" class="form-control" id="file_logo" name="file_logo">
                         </div>
-                        <img src="" alt="" id="img" max-width="15px" max-height="10px">
-                    </div>
+                        <div class="col-4">
+                            <img src="" alt="" id="img_file" width="100px" height="auto">
+                        </div>
+                    </div>              
 
-                    <!-- <input type="text" id="file" name="file"> -->
-                    
+                    <input type="hidden" id="file_input" name="file_input">
+
                     <h3 class="text-primary">Conexíon</h3>
                     
                     <div class="row align-items-center mb-2">
                         <label for="Usuario" class="form-label col-sm-4">Usuario</label>
-                        <div class="col-7">
+                        <div class="col-8">
                             <input class="form-control" id="Usuario" name="Usuario">
                         </div>
                     </div>
 
                     <div class="row align-items-center mb-2">
                         <label for="pass" class="form-label col-sm-4">Contraseña</label>
-                        <div class="col-7">
+                        <div class="col-8">
                             <input type="password" class="form-control" id="pass" name="pass">
                         </div>
                     </div>
 
                     <div class="row align-items-center mb-2">
                         <label for="Estacion" class="form-label col-sm-4">Estación</label>
-                        <div class="col-7">
+                        <div class="col-8">
                             <input type="text" class="form-control" id="Estacion" name="Estacion">
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-3">
-                        <button type="button" class="btn btn-primary me-2">Conectar</button>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn-primary me-2" id="btn_conect">Conectar</button>
                         <button type="button" class="btn btn-success" id="btn_save">Guardar</button>
                     </div>
                 </div>
             </div>
         </form>
+        <a href="login.html" class="text-danger">Salir</a>
     </div>
     
 
-    <a href="login.html">Volver al login </a>
 
 </body>
     <script src="../js/login.js"></script>

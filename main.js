@@ -26,7 +26,7 @@ const createindexWindow = () => {
   const index = new BrowserWindow({
     width: 800,
     height: 600,
-    // kiosk: true,
+    kiosk: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
@@ -35,14 +35,10 @@ const createindexWindow = () => {
 
   const template = [
     {
-      label: 'Ventanas',
-      submenu: [{
-        role: 'help',
-        accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Alt+Shift+I',
-        click: () => {console.log('Electron click')}
-      },
-      {role: 'quit'},
-    ]
+      label: 'Cerrar aplicacion',
+      submenu: [
+        {role: 'quit'},
+      ]
     },
     {
       label: 'Herramientas',

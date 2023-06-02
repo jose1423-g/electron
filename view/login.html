@@ -2,12 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <!-- <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    /> -->
-    
     <title>login</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
@@ -18,22 +12,19 @@
   <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-8">
+                <div class="alert alert-warning position-fixed w-100 start-0 top-0 none" id="alert_warning" role="alert"></div>
                 <form action="#" method="POST" id="login_form"> 
                     <h1 class="text-primary text-center">GASOFAC</h1>
                     <h2 class="text-center text-primary mb-3">Facturación web de combustible</h2>
                     <div class="mb-3">
-                        <label for="username" class="form-label">Contraseña</label>  
-                        <input type="text" class="form-control" id="username" name="username">
-                    </div>
-                    <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>  
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
-                    <button type="button" class="btn btn-primary" id="btn-enviar">enviar</button>
+                    <button type="button" class="btn btn-primary" id="btn_login">enviar</button>
                 </form>
             </div>
+            <a href="index.html" class="text-danger">Salir</a>
         </div>
-        <a href="index.html">volver</a>
   </div>
 
   <script src="../js/login.js"></script>
