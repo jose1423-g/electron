@@ -24,11 +24,14 @@ if (btn_save) {
     btn_save.addEventListener('click', registro)
 }
 
-login_form.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-    }
-})
+if (login_form) {
+    login_form.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+        }
+    })
+}
+
 
 function show_data() {
     fetch("../config.json", {
