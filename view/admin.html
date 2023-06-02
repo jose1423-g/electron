@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+    
     <title>Kisko</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
@@ -20,7 +17,7 @@
               <img src="../img/logo-kisko.png" alt="logo" width="50px">
             </div>
         </div>
-        <form action="#" method="post" id="billing_form">
+        <form action="#" method="post" id="form_admin">
             <div class="row"> 
                 <div class="col ps-3 pe-0">
                     <h3 class="text-primary">General</h3>
@@ -34,10 +31,13 @@
                     <div class="row align-items-center mb-2">
                         <label for="logo" class="form-label col-sm-4">Logo o imagen publicitaria</label> 
                         <div class="col-7">
-                            <input type="file" class="form-control" id="logo" name="logo">
+                            <input type="file" class="form-control" id="file_logo" name="file_logo">
                         </div>
+                        <img src="" alt="" id="img" max-width="15px" max-height="10px">
                     </div>
 
+                    <!-- <input type="text" id="file" name="file"> -->
+                    
                     <h3 class="text-primary">Conexíon</h3>
                     
                     <div class="row align-items-center mb-2">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="d-flex justify-content-center mt-3">
                         <button type="button" class="btn btn-primary me-2">Conectar</button>
-                        <button type="button" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-success" id="btn_save">Guardar</button>
                     </div>
                 </div>
             </div>

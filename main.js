@@ -1,11 +1,11 @@
-const { fail } = require('assert')
-const { app, BrowserWindow, ipcMain, webContents, Menu} = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, Menu} = require('electron')
 const path = require('path')
-const express = require('express');
 const fs = require('fs');
-const expressApp = express();
-const port = 3000;
-// const connection = require('./app.js') conexion a db
+// const express = require('express');
+// const expressApp = express();
+// const port = 3000;
+
+const filePath = path.join(__dirname, 'config.json');
 
 var options = {
   silent: true,
@@ -69,12 +69,6 @@ const createprintWindow = (url) => {
     })  
 }
 
-ipcMain.handle('files:print',(event, url) => {
-  createprintWindow(url)
-  return "holis si jalo"; 
-})
-
-
 app.whenReady().then(() => { 
   createindexWindow()
   app.on('activate', () => {
@@ -85,3 +79,32 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
+
+ipcMain.handle('files:print',(event, url) => {
+  createprintWindow(url)
+  return "holis si jalo"; 
+})
+
+// Escuchar el evento de registro desde el proceso de renderizado
+ipcMain.on('register', (event, data) => {
+
+  //old
+  let jsonData = [];
+  if (fs.existsSync(filePath)) {
+    const fileData = fs.readFileSync(filePath);
+    //  jsonData = JSON.parse(fileData);
+  }
+
+  // Agregar los nuevos datos al arreglo existente
+  jsonData.push(data);
+
+  // Guardar los datos actualizados en el archivo JSON
+  fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
+
+  // Mostrar un diálogo de confirmación al usuario
+  dialog.showMessageBoxSync({
+    type: 'info',
+    title: 'Guardado exitoso',
+    message: 'Los datos se han guardado correctamente.'
+  });
+});

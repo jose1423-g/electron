@@ -10,6 +10,10 @@ contextBridge.exposeInMainWorld('versions', {
   // también podemos exponer variables, no sólo funciones
 })
 
+contextBridge.exposeInMainWorld('saveform', {
+    register: (data) => ipcRenderer.send('register',data) 
+})
+
 contextBridge.exposeInMainWorld('files', {
   print: (url) => ipcRenderer.invoke('files:print', url),
 })
