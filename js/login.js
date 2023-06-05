@@ -12,9 +12,8 @@ const pass = document.getElementById('pass')
 const estacion = document.getElementById('Estacion')
 const file_input = document.getElementById('file_input')
 const alert_warning = document.getElementById('alert_warning')
+const alert_danger = document.getElementById('alert_danger')
 const login_form = document.getElementById('login_form')
-
-
 
 if (btn_login) {
     btn_login.addEventListener('click', login)
@@ -30,6 +29,10 @@ if (login_form) {
           event.preventDefault();
         }
     })
+}
+
+if (btn_conect) {
+    btn_conect.addEventListener('click', connect)   
 }
 
 
@@ -49,7 +52,7 @@ function show_data() {
             texto_bienvenida = element.TextoBienvenida
             logo = element.file 
             user = element.Usuario 
-            password = element.pass
+            password = element.passwd
             station = element.Estacion 
         }
         if (texto) {
@@ -59,8 +62,7 @@ function show_data() {
             file_input.value = logo    
         }
         if (img_file) {
-            img_file.src = logo
-            
+            img_file.src = logo   
         }
         if (usuario) {
             usuario.value = user
@@ -73,6 +75,7 @@ function show_data() {
         }
     });
 }
+
 onload = show_data
 
 async function registro() {    
@@ -96,7 +99,6 @@ async function registro() {
 }
 
 function login() {
-    // window.location.href = "admin.html"
     let  password = document.getElementById('password').value
     var info = {
        f_name:'checkPassword',
@@ -117,6 +119,36 @@ function login() {
             alert_warning.classList.remove('none')
             setTimeout( function () {
                 alert_warning.classList.add('none')                
+            }, 3000)
+        }
+    });
+}
+
+function connect() {
+    let  usuario   = document.getElementById('Usuario').value
+    let  passwd = document.getElementById('pass').value
+
+    let info = {
+        UserName: usuario,
+        Passwd: passwd, 
+        f_name: 'checkConfig'   
+    }
+    fetch("https://gasofac.mx/ria/data_kiosko_config.php", {
+        method: 'POST',
+        body: JSON.stringify(info),
+    }).then(function(data) {
+        return data.json()  
+    }).then(json => {
+        console.log(json)
+        let result = json.result;
+        let msg = json.msg
+        if (result == 1) {
+            window.location.href = "index.html"
+        } else {
+            alert_danger.innerHTML = msg
+            alert_danger.classList.remove('none')
+            setTimeout( function () {
+                alert_danger.classList.add('none')                
             }, 3000)
         }
     });

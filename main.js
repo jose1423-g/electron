@@ -43,9 +43,9 @@ const createindexWindow = () => {
     {
       label: 'Herramientas',
       submenu: [
-        {role: 'about'},
-        {role: 'toggleDevTools'},
-        {role: 'reload'}
+        {role: 'about'}
+        // {role: 'toggleDevTools'},
+        // {role: 'reload'}
       ]
     }
   ]

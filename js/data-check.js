@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     show_tickets()
     show_total()
     show_tickets_clean()
+
 });
 //get referencia del INDEX
 if (referencia_index) {
@@ -136,7 +137,7 @@ document.addEventListener('click', function(event) {
         getdataidrfc(valor) 
     }
 });
-//Genera la factura/ envio del formulario
+//GENERAR FACTURA
 if (generar_factura) {
     generar_factura.addEventListener('click', function () {
         const formdata = new FormData(billing_form);
@@ -146,6 +147,7 @@ if (generar_factura) {
         })
         .then(response => response.json())
         .then(data => {
+            console.log('datos '+data)
             respuesta = data.result;
             if (respuesta == 1) {
                 window.location.href = "timbrado.html"
@@ -342,6 +344,7 @@ function delete_all(valor) {
 //elimina los datos del array a_ticket_clean
 function delete_clean(valor) {
     a_ticket_clean.splice(valor, 1)
+    show_tickets_clean()
 }
 //delete valor
 function delete_total(valor) {
