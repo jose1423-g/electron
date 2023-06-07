@@ -24,11 +24,13 @@ function datos() {
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
             file  = element.file
-            bienvenida = element.TextoBienvenida+''+element.Estacion
+            bienvenida = element.TextoBienvenida+' '+element.Estacion
         }
         texto_bienvenida.innerHTML = bienvenida
         logo.src = file
-
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 onload = datos

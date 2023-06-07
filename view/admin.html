@@ -40,6 +40,7 @@
                     </div>              
 
                     <input type="hidden" id="file_input" name="file_input">
+                    <input type="hidden" id="id_estacion" name="id_estacion">
 
                     <h3 class="text-primary">Conexíon</h3>
                     
@@ -60,10 +61,11 @@
                     <div class="row align-items-center mb-2">
                         <label for="Estacion" class="form-label col-sm-4">Estación</label>
                         <div class="col-8">
-                            <input type="text" class="form-control" id="Estacion" name="Estacion">
+                            <input type="text" class="form-control" id="Estacion" name="Estacion" readonly>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-3">
+                        <button type="button" class="btn btn-success" id="btn_salir">Salir</button>
                         <button type="button" class="btn btn-primary me-2" id="btn_conect">Conectar</button>
                         <button type="button" class="btn btn-success" id="btn_save">Guardar</button>
                     </div>

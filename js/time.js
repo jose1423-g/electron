@@ -8,12 +8,12 @@ if (time) {
   time.innerHTML = minutos
 }
 
-
 //esta funcion se llama cada 60 segundos
 function restarMinuto() {
   minutos--;
-  if (minutos < 0) {
+  if (minutos == 0) {
     minutos = 0;
+    clearInterval(tiempo)
     redirectToIndex()
   } 
   if (time) {

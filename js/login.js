@@ -14,6 +14,7 @@ const file_input = document.getElementById('file_input')
 const alert_warning = document.getElementById('alert_warning')
 const alert_danger = document.getElementById('alert_danger')
 const login_form = document.getElementById('login_form')
+const id_estacion = document.getElementById('id_estacion')
 
 if (btn_login) {
     btn_login.addEventListener('click', login)
@@ -47,13 +48,15 @@ function show_data() {
         var user = ""
         var password = ""
         var station = ""
+        var IdEstacion = ""
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
             texto_bienvenida = element.TextoBienvenida
             logo = element.file 
             user = element.Usuario 
-            password = element.passwd
+            password = element.pass
             station = element.Estacion 
+            IdEstacion = element.id_estacion
         }
         if (texto) {
             texto.value = texto_bienvenida            
@@ -72,6 +75,9 @@ function show_data() {
         }
         if (estacion) {
             estacion.value = station
+        }
+        if (id_estacion) {
+            id_estacion.value = IdEstacion
         }
     });
 }
@@ -139,11 +145,13 @@ function connect() {
     }).then(function(data) {
         return data.json()  
     }).then(json => {
-        console.log(json)
         let result = json.result;
         let msg = json.msg
+        let nom_estacion = json.NombreCompletoEstacion
+        let IdEstacion = json.IdEstacion
         if (result == 1) {
-            window.location.href = "index.html"
+            id_estacion.value = IdEstacion
+            estacion.value = nom_estacion
         } else {
             alert_danger.innerHTML = msg
             alert_danger.classList.remove('none')

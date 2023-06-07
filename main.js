@@ -26,7 +26,7 @@ const createindexWindow = () => {
   const index = new BrowserWindow({
     width: 800,
     height: 600,
-    kiosk: true,
+    // kiosk: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
@@ -43,9 +43,9 @@ const createindexWindow = () => {
     {
       label: 'Herramientas',
       submenu: [
-        {role: 'about'}
-        // {role: 'toggleDevTools'},
-        // {role: 'reload'}
+        {role: 'about'},
+        {role: 'toggleDevTools'},
+        {role: 'reload'}
       ]
     }
   ]

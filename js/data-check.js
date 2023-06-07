@@ -6,9 +6,9 @@ let rfc = document.getElementById('RFC')
 let razon_social = document.getElementById('RazonSocial')
 let codigo_postal = document.getElementById('CodigoPostal')
 let regimen_fiscal = document.getElementById('CdCfdiRegimen')
-let uso_cfdi = document.getElementById('CdUsoCfdiFijo')
+let uso_cfdi = document.getElementById('CdUsoCfdi')
 let email = document.getElementById('Email')
-let forma_pago_fija = document.getElementById('FormaPagoFija')
+let forma_pago_fija = document.getElementById('CfdiFormaPago')
 let observaciones = document.getElementById('Observaciones')
 //otros
 let referencia = document.getElementById('referencia')
@@ -20,7 +20,6 @@ let val_referencia = document.getElementById("referencia")
 let body = document.getElementById('body')
 let comprobantes = document.getElementById("comprobantes")
 let total = document.getElementById('total')
-
 let referencia_index = document.getElementById('referencia_index')
 let val_referencia_index = document.getElementById('referencia_index')
 let btn  = document.getElementById('btn')
@@ -28,14 +27,13 @@ let a_referencia = document.getElementById('a_referencia_clean')
 let billing_form = document.getElementById('billing_form')
 let generar_factura = document.getElementById('generar_factura')
 const imprimir = document.getElementById('imprimir')
-
 const alert_index = document.getElementById('alert_index')
 const alert_info = document.getElementById('alert_info')
 const alert_warning = document.getElementById('alert_warning')
+const id_cliente = document.getElementById('IdCliente')
+const id_sucursal = document.getElementById('IdSucursal')
 
-
-
-
+//get referencia of index.html
 document.addEventListener('DOMContentLoaded', function() {
     
     var queryParameters = new URLSearchParams(window.location.search);
@@ -46,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var array1 = JSON.parse(array_all);
     var array2 = JSON.parse(array_total);
     var array3 = JSON.parse(array_clean)
+
 
     var valor_ticket_all = array1[0].toString()          
     var valor_total = array2[0].toString()
@@ -60,6 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
     show_tickets_clean()
 
 });
+//get referencia of timbrado.html
+let print_url;
+document.addEventListener('DOMContentLoaded', function () {
+    var queryParameters = new URLSearchParams(window.location.search);
+    var printurl = queryParameters.get('PrintUrl')
+    print_url = JSON.parse(printurl)
+    console.log('dato printurl', print_url);
+})
 //get referencia del INDEX
 if (referencia_index) {
     referencia_index.addEventListener('keypress', function (event) {
@@ -84,7 +91,6 @@ if (referencia) {
             re = /-/g;
             referencia_clean = val_referencia.value.replace(re,'')
             if (a_ticket_clean.includes(referencia_clean)) {
-                alert("La referencia "+referencia_clean+" ya esta ingresada")
                 referencia.value = "";
             } else {
                 a_ticket_clean.push(referencia_clean)
@@ -149,13 +155,18 @@ if (generar_factura) {
         .then(data => {
             console.log('datos '+data)
             respuesta = data.result;
+            msg = data.msg;
             if (respuesta == 1) {
                 window.location.href = "timbrado.html"
+                console.log('resp 1 '+ data)
+                var printurl = JSON.stringify(data.PrintUrl);
+                var arrayQueryString = '?PrintUrl=' + encodeURIComponent(printurl);
+                window.location.href = 'timbrado.html' + arrayQueryString;  
             } else {
-                alert_warning.innerHTML = 'Error al generar la factura'
+                alert_warning.innerHTML = msg
                 alert_warning.classList.remove('none')
                 setTimeout( function () {
-                    alert_info.classList.add('none')                
+                    alert_warning.classList.add('none')                
                 }, 5000)
             }
         })
@@ -263,7 +274,7 @@ function datarfc() {
     }).then(json => {
         lista = "";
         for (let index = 0; index < json.length; index++) {
-            const element = '<li class="list-group-item"><a href="#" class="click-rfc nav-link" data-id="'+json[index].Nombre+','+json[index].Email+','+json[index].FormaPagoFija+','+json[index].CdUsoCfdiFijo+','+json[index].CodigoPostal+','+json[index].CdCfdiRegimen+'">'+json[index].NombreDisplay+'</a></li>'
+            const element = '<li class="list-group-item"><a href="#" class="click-rfc nav-link" data-id="'+json[index].Nombre+','+json[index].Email+','+json[index].FormaPagoFija+','+json[index].CdUsoCfdiFijo+','+json[index].CodigoPostal+','+json[index].CdCfdiRegimen+','+json[index].CodFiscal+'">'+json[index].NombreDisplay+'</a></li>'
             lista += element 
         }
         lista_rfc.innerHTML = lista        
@@ -324,7 +335,7 @@ function show_tickets() {
         datos_lista += element+btn 
     }
     lista_tickets_all.innerHTML  = datos_lista
-    var num_comprobantes = a_tickets_all.length
+    let num_comprobantes = a_tickets_all.length
     comprobantes.innerHTML = num_comprobantes;
 }
 //muestra el total  de los tickets
@@ -360,13 +371,16 @@ function remove_class() {
 //obtiene los valores correpondientes al rfc y los muestra en los inputs
 function  getdataidrfc(valor) {
     datos = valor.split(',')
+
     const RazonSocial = datos[0].trim(); //Nombre
     const Email = datos[1].trim(); //email
     const FormaPagoFija = datos[2].trim(); //FormaPagoFija
     const CdUsoCfdiFijo = datos[3].trim(); // CdUsoCfdiFijo
     const CodigoPostal = datos[4].trim(); // CodigoPostal
     const CdCfdiRegimen = datos[5].trim(); //CdCfdiRegimen
+    const rfc_val = datos[6].trim(); //RFC
 
+    val_rfc.value = rfc_val
     razon_social.value = RazonSocial
     codigo_postal.value = CodigoPostal
     regimen_fiscal.value = CdCfdiRegimen
@@ -376,7 +390,5 @@ function  getdataidrfc(valor) {
 }
 //funcion para imprimir  asyncrona
 async function printer(){
-    const url = "https://gasofac.mx/reportes/factura_electronica_t.php?IdFactura=2772915&is_show=1";
-    const print = await window.dataprint.print(url)
-    console.log("hey :)"+print)
+    const print = await window.dataprint.print(print_url)
 }
