@@ -30,8 +30,38 @@ const imprimir = document.getElementById('imprimir')
 const alert_index = document.getElementById('alert_index')
 const alert_info = document.getElementById('alert_info')
 const alert_warning = document.getElementById('alert_warning')
-const id_cliente = document.getElementById('IdCliente')
-const id_sucursal = document.getElementById('IdSucursal')
+const user = document.getElementById('User')
+const IdEstacion = document.getElementById('IdEstacion')
+const pass = document.getElementById('pass')
+
+//get data from file config.json
+function datos() {
+    fetch("../config.json", {
+        method: 'POST',
+    }).then(function(data) {
+        return data.json()  
+    }).then(json => {
+        var usuario = ""
+        var sucursal = ""
+        var password = ""
+        for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            usuario = element.Usuario
+            sucursal  = element.id_estacion
+            password = element.pass
+        }
+        user.value = usuario
+        IdEstacion.value = sucursal
+        pass.value = password
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+
+if (user) {
+    onload = datos
+}
 
 //get referencia of index.html
 document.addEventListener('DOMContentLoaded', function() {
@@ -65,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var queryParameters = new URLSearchParams(window.location.search);
     var printurl = queryParameters.get('PrintUrl')
     print_url = JSON.parse(printurl)
-    console.log('dato printurl', print_url);
 })
 //get referencia del INDEX
 if (referencia_index) {

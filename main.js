@@ -1,9 +1,8 @@
 const { app, BrowserWindow, ipcMain, dialog, Menu} = require('electron')
 const path = require('path')
 const fs = require('fs');
-// const express = require('express');
-// const expressApp = express();
-// const port = 3000;
+const axios = require('axios');
+const { print } = require('pdf-to-printer');
 
 const filePath = path.join(__dirname, 'config.json');
 
@@ -54,15 +53,35 @@ const createindexWindow = () => {
   Menu.setApplicationMenu(menu)
 }
 const createprintWindow = (url) => {
-    const print = new BrowserWindow({
+    const printpdf = new BrowserWindow({
       width: 800,
       height: 600,
       show: false,
     })  
-    print.loadURL(url)
-    print.webContents.print(options, (success, failureReason) => {
-      if (!success) console.log(failureReason)
-    })  
+    printpdf.loadURL(url)
+    // se imprime automaticamente sin mostrar la ventana de impresion
+    const timestamp = Date.now();
+    const outputPath =  path.join(__dirname, 'facturas')
+    const pdfPath = `${outputPath}factura_${timestamp}.pdf`;
+    axios.get(url, { responseType: 'arraybuffer' })
+    .then(response => {
+      fs.writeFileSync(pdfPath, Buffer.from(response.data));
+      // console.log('El archivo PDF se ha descargado correctamente.');
+      print(pdfPath, {
+        silent: true,
+        printBackground: true,
+        copies: 1
+      })
+        .then(() => {
+          console.log('La impresion se ha completado.');
+        })
+        .catch(error => {
+          console.error('Error al imprimir:', error);
+        });
+    })
+    .catch(error => {
+      console.error('Error al descargar el archivo PDF:', error);
+    });
 }
 
 app.whenReady().then(() => { 
@@ -78,7 +97,6 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle('files:print',(event, url) => {
   createprintWindow(url)
-  return "holis si jalo"; 
 })
 
 // Escuchar el evento de registro desde el proceso de renderizado
@@ -104,3 +122,8 @@ ipcMain.on('register', (event, data) => {
     message: 'Los datos se han guardado correctamente.'
   });
 });
+
+ // print.loadURL(url)
+  // print.webContents.print(options, (success, failureReason) => {
+  //   if (!success) console.log(failureReason)
+  // })  
