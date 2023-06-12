@@ -2,7 +2,8 @@ const { app, BrowserWindow, ipcMain, dialog, Menu} = require('electron')
 const path = require('path')
 const fs = require('fs');
 const axios = require('axios');
-const { print } = require('pdf-to-printer');
+const { print } = require('pdf-to-printer')
+const VirtualKeyboard = require('electron-virtual-keyboard')
 
 const filePath = path.join(__dirname, 'config.json');
 
@@ -27,11 +28,16 @@ const createindexWindow = () => {
     height: 600,
     // kiosk: true,
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
+
     },
   })
-  index.loadFile('./view/index.html')
 
+  index.loadFile('./view/index.html')
+  vkb = new VirtualKeyboard(index.webContents)
+  
   const template = [
     {
       label: 'Cerrar aplicacion',

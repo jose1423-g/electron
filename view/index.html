@@ -5,7 +5,9 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <title>Kisko</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href="../node_modules/electron-virtual-keyboard/virtual-keyboard.css" rel="stylesheet" />
     <link rel="stylesheet" href="../style.css">
+
 </head>
 <body>
     <div class="container mt-5">
@@ -22,19 +24,18 @@
             <div class="col-8 mb-4">
                 <div>
                     <label class="form-label mb-3" for="referencia_index">Teclee o escanee su referencia <span class="ms-2 question-icon pointer" id="info">?</span></label>
-                    <input type="text" class="form-control" id="referencia_index">
+                    <input type="text" class="form-control keyboard" id="referencia_index">
                 </div>
             </div>
-
+            <div class="kb-container"></div>
             <div class="col-12 text-center">
                 <img src="" alt="por favor configure un logo" width="450px" height="160px" id="logo-gasofac">
             </div>
-            <!-- <a href="main.html">Main</a> -->
         </div>
         <!-- modal -->
     </div>
 </body>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="../js/renderer.js"></script>
     <script src="../js/data-check.js"></script>
+    <script src="../teclado.js"></script>
 </html>

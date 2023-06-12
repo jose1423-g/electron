@@ -1,9 +1,9 @@
-const { contextBridge, ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron')
 
-contextBridge.exposeInMainWorld('saveform', {
+window.saveform = {
     register: (data) => ipcRenderer.send('register',data) 
-})
+}
 
-contextBridge.exposeInMainWorld('dataprint', {
+window.dataprint = {
   print: (url) => ipcRenderer.invoke('files:print', url),
-})
+}

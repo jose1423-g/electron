@@ -79,6 +79,9 @@ function show_data() {
         if (id_estacion) {
             id_estacion.value = IdEstacion
         }
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 
