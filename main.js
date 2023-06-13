@@ -9,6 +9,7 @@ let index;
 
 const createindexWindow = () => {
     index = new BrowserWindow({
+    title: 'Autofac',
     width: 800,
     height: 600,
     kiosk: true,

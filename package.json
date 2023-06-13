@@ -1,7 +1,7 @@
 {
-  "name": "my-electron-app",
+  "name": "autofac",
   "version": "1.0.0",
-  "description": "hello world",
+  "description": "kisko autofac",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
