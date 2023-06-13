@@ -4,60 +4,26 @@ const fs = require('fs');
 const axios = require('axios');
 const { print } = require('pdf-to-printer')
 const VirtualKeyboard = require('electron-virtual-keyboard')
-
 const filePath = path.join(__dirname, 'config.json');
-
-var options = {
-  silent: true,
-  printBackground: true,
-  color: false,
-  margin: {
-      marginType: 'printableArea'
-  },
-  landscape: false,
-  pagesPerSheet: 1,
-  collate: false,
-  copies: 1,
-  header: 'Header of the Page',
-  footer: 'Footer of the Page'
-}
+let index;
 
 const createindexWindow = () => {
-  const index = new BrowserWindow({
+    index = new BrowserWindow({
     width: 800,
     height: 600,
-    // kiosk: true,
+    kiosk: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
-
     },
   })
 
   index.loadFile('./view/index.html')
   vkb = new VirtualKeyboard(index.webContents)
-  
-  const template = [
-    {
-      label: 'Cerrar aplicacion',
-      submenu: [
-        {role: 'quit'},
-      ]
-    },
-    {
-      label: 'Herramientas',
-      submenu: [
-        {role: 'about'},
-        {role: 'toggleDevTools'},
-        {role: 'reload'}
-      ]
-    }
-  ]
-
-  const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
+  index.removeMenu()
 }
+
 const createprintWindow = (url) => {
     const printpdf = new BrowserWindow({
       width: 800,
@@ -101,8 +67,14 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
+//imprime la factura
 ipcMain.handle('files:print',(event, url) => {
   createprintWindow(url)
+})
+
+//cierra la app
+ipcMain.handle('closeapp:close', async () => {
+  index.close()
 })
 
 // Escuchar el evento de registro desde el proceso de renderizado
@@ -112,7 +84,6 @@ ipcMain.on('register', (event, data) => {
   let jsonData = [];
   if (fs.existsSync(filePath)) {
     const fileData = fs.readFileSync(filePath);
-    //  jsonData = JSON.parse(fileData);
   }
 
   // Agregar los nuevos datos al arreglo existente
@@ -128,8 +99,3 @@ ipcMain.on('register', (event, data) => {
     message: 'Los datos se han guardado correctamente.'
   });
 });
-
- // print.loadURL(url)
-  // print.webContents.print(options, (success, failureReason) => {
-  //   if (!success) console.log(failureReason)
-  // })  

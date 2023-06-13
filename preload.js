@@ -7,3 +7,7 @@ window.saveform = {
 window.dataprint = {
   print: (url) => ipcRenderer.invoke('files:print', url),
 }
+
+window.closeapp = {
+  close: () => ipcRenderer.invoke('closeapp:close')
+}

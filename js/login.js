@@ -15,6 +15,9 @@ const alert_warning = document.getElementById('alert_warning')
 const alert_danger = document.getElementById('alert_danger')
 const login_form = document.getElementById('login_form')
 const id_estacion = document.getElementById('id_estacion')
+const cerrar = document.getElementById('cerrar')
+
+
 
 if (btn_login) {
     btn_login.addEventListener('click', login)
@@ -36,6 +39,12 @@ if (btn_conect) {
     btn_conect.addEventListener('click', connect)   
 }
 
+if (cerrar) {
+    cerrar.addEventListener('click', async () => {
+        const salir = await window.closeapp.close()
+        console.log('aqui', salir)
+    })
+}
 
 function show_data() {
     fetch("../config.json", {
