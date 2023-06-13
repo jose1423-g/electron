@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <title>Kisko</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link href="../node_modules/electron-virtual-keyboard/virtual-keyboard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
 
 </head>
@@ -23,17 +23,37 @@
             <div class="alert alert-info m-0 none" id="alert_index" role="alert"></div>
             <div class="col-8 mb-4">
                 <div>
-                    <label class="form-label mb-3" for="referencia_index">Teclee o escanee su referencia <span class="ms-2 question-icon pointer" id="info">?</span></label>
+                    <label class="form-label mb-3" for="referencia_index">Teclee o escanee su referencia</label><span class="ms-2 question-icon pointer" id="info">?</span>
                     <input type="text" class="form-control keyboard" id="referencia_index">
                 </div>
             </div>
-            <div class="kb-container"></div>
             <div class="col-12 text-center">
                 <img src="" alt="por favor configure un logo" width="450px" height="160px" id="logo-gasofac">
             </div>
         </div>
-        <!-- modal -->
+        <!-- modal --> 
     </div>
+
+    <div class="modal_local none" id="modal_local">
+        <div id="carousel">
+          <div class="carousel-container">
+            <div class="carousel-item1">
+                <h3 class="mb-4 text-center">Presenta el código QR del comprobante en el escaner</h3>
+                <img src="../img/QR.PNG" alt="icon_qr"> 
+            </div>
+            <div class="carousel-item1">
+                <h3 class="mb-4 text-center">O ingrese manualmente la referencia</h3>
+                <img src="../img/referencia.PNG" alt="icon_referencia">
+            </div>
+          </div>
+        </div>  
+        <div class="content-btn">
+          <button class="btn btn-primary" id="prev-button">Anterior</button>
+          <button class="btn btn-danger mx-2" id="btn_close">Salir</button>
+          <button class="btn btn-primary" id="next-button">Siguiente</button>
+        </div>
+    </div>
+
 </body>
     <script src="../js/renderer.js"></script>
     <script src="../js/data-check.js"></script>
