@@ -39,14 +39,11 @@ function datos() {
             file  = element.file
             bienvenida = element.TextoBienvenida
         }
+        texto_bienvenida.innerHTML = bienvenida    
         logo.src = file            
-        if (bienvenida == '') {
-            texto_bienvenida.innerHTML = 'Por favor configure su mensaje de bienvenida'
-        } else {
-            texto_bienvenida.innerHTML = bienvenida    
-        }
     })
     .catch(error => {
+        texto_bienvenida.innerHTML = 'Por favor configure su mensaje de bienvenida'
         console.error(error);
     });
 }
