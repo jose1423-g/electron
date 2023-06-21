@@ -34,12 +34,11 @@ const createprintWindow = (url) => {
     printpdf.loadURL(url)
     // se imprime automaticamente sin mostrar la ventana de impresion
     const timestamp = Date.now();
-    const outputPath =  path.join(__dirname, 'facturas')
+    const outputPath =  path.join(__dirname, 'facturas/')
     const pdfPath = `${outputPath}factura_${timestamp}.pdf`;
     axios.get(url, { responseType: 'arraybuffer' })
     .then(response => {
       fs.writeFileSync(pdfPath, Buffer.from(response.data));
-      // console.log('El archivo PDF se ha descargado correctamente.');
       print(pdfPath, {
         silent: true,
         printBackground: true,
