@@ -12,7 +12,7 @@ const createindexWindow = () => {
     title: 'eDoxSat',
     width: 800,
     height: 600,
-    kiosk: true,
+    // kiosk: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -47,6 +47,12 @@ const createprintWindow = (url) => {
       })
         .then(() => {
           console.log('La impresion se ha completado.');
+          try {
+            fs.unlinkSync(pdfPath)            
+            console.log('Archivo borrado correctamente')
+          } catch (error) {
+            console.log('Error al borrar el archivo'. error)
+          }
         })
         .catch(error => {
           console.error('Error al imprimir:', error);
