@@ -2,23 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <title>Kisko</title>
     <link href="../node_modules/electron-virtual-keyboard/virtual-keyboard.css" rel="stylesheet" />
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../style.css">
 
 </head>
 <body>
-    <div class="container mt-5">
-        
+
+    <div class="container mt-5">    
         <div class="row justify-content-center">
             <div class="col-12 d-flex justify-content-center align-items-center mb-4">
-                <h1 class="me-2">Kiosko de Facturación</h1>
+                <h1 class="me-2 fw-bold">AUTOFAC</h1>
                 <img src="../img/logo-kisko.png" class="pointer" alt="logo" width="50px" id="logo-kisko">
             </div>
             <div class="col-12 mb-3">
-                <h2 class="text-center text-primary" id="texto-bienvenida">Por favor configure su mensaje de bienvenida</h2>
+                <h2 class="text-center text-primary" id="texto-bienvenida"></h2>
             </div>
             <div class="alert alert-info m-0 none" id="alert_index" role="alert"></div>
             <div class="col-8 mb-4">
@@ -31,7 +29,6 @@
                 <img src="" alt="por favor configure un logo" width="450px" height="160px" id="logo-gasofac">
             </div>
         </div>
-        <!-- modal --> 
     </div>
 
     <div class="modal_local none" id="modal_local">
@@ -54,8 +51,8 @@
         </div>
     </div>
 
-</body>
     <script src="../js/renderer.js"></script>
     <script src="../js/data-check.js"></script>
     <script src="../teclado.js"></script>
+</body>
 </html>

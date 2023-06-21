@@ -9,7 +9,7 @@ let index;
 
 const createindexWindow = () => {
     index = new BrowserWindow({
-    title: 'Autofac',
+    title: 'eDoxSat',
     width: 800,
     height: 600,
     kiosk: true,

@@ -37,10 +37,14 @@ function datos() {
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
             file  = element.file
-            bienvenida = element.TextoBienvenida+' '+element.Estacion
+            bienvenida = element.TextoBienvenida
         }
-        texto_bienvenida.innerHTML = bienvenida
-        logo.src = file
+        logo.src = file            
+        if (bienvenida == '') {
+            texto_bienvenida.innerHTML = 'Por favor configure su mensaje de bienvenida'
+        } else {
+            texto_bienvenida.innerHTML = bienvenida    
+        }
     })
     .catch(error => {
         console.error(error);

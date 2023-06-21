@@ -5,7 +5,7 @@ require('electron-virtual-keyboard/client.js')(window, jQuery);
 
 
 const teclado = $('.keyboard').keyboard({
-  theme: 'theme-black',
+  theme: '',
   layout: 'us-en', 
   autoPosition: true,
   displayOnFocus: true
