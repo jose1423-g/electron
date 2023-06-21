@@ -12,7 +12,7 @@ const createindexWindow = () => {
     title: 'eDoxSat',
     width: 800,
     height: 600,
-    // kiosk: true,
+    kiosk: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
