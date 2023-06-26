@@ -22,7 +22,7 @@ const createindexWindow = () => {
 
   index.loadFile('./view/index.html')
   vkb = new VirtualKeyboard(index.webContents)
-  index.removeMenu()
+  // index.removeMenu()
 }
 
 const createprintWindow = (url) => {
