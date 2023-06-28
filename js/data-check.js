@@ -250,6 +250,9 @@ function val_datacheck() {
                 alert_index.classList.add('none')
             }, 3000) 
         }
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 //get datos de la referencia
@@ -282,7 +285,9 @@ function datacheck() {
                 alert_info.classList.add('none')                
             }, 3000)
         }
-        
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 //get datos del rfc
@@ -307,6 +312,9 @@ function datarfc() {
             lista += element 
         }
         lista_rfc.innerHTML = lista        
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 //get uso de cfdi
@@ -330,6 +338,9 @@ function get_uso_cfdi() {
             cfdi += element 
         }
         uso_cfdi.innerHTML = cfdi       
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 //get regimen fiscal
@@ -353,6 +364,9 @@ function  get_regimen_fiscal() {
             lista += element 
         }
         regimen_fiscal.innerHTML = lista        
+    })
+    .catch(error => {
+        console.error(error);
     });
 }
 //muestra los tikects

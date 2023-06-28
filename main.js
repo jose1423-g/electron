@@ -12,7 +12,7 @@ const createindexWindow = () => {
     title: 'eDoxSat',
     width: 800,
     height: 600,
-    kiosk: true,
+    // kiosk: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -22,7 +22,7 @@ const createindexWindow = () => {
 
   index.loadFile('./view/index.html')
   vkb = new VirtualKeyboard(index.webContents)
-  index.removeMenu()
+  // index.removeMenu()
 }
 
 const createprintWindow = (url) => {

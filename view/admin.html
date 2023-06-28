@@ -11,8 +11,8 @@
     <div class="container mt-3">
         <div class="alert alert-danger position-fixed w-100 start-0 top-0 none" id="alert_danger" role="alert"></div>
         <div class="row">
-            <div class="col d-flex justify-content-center align-items-center mb-3">
-              <h1 class="me-2">Kiosko de Facturación</h1>
+            <div class="col d-flex justify-content-center align-items-center flex-row-reverse ">
+              <h1 class="ms-2 fw-bold text-primary mb-0">AutoFac</h1>
               <img src="../img/logo-kisko.png" alt="logo" width="50px">
             </div>
         </div>
@@ -37,7 +37,15 @@
                         <div class="col-4">
                             <img src="" alt="" id="img_file" width="100px" height="auto">
                         </div>
-                    </div>              
+                    </div>          
+                    
+                    <div class="row align-items-center mb-2">
+                        <label for="v_sesion" class="form-label col-sm-4">Vigencia de sesion</label>
+                        <div class="col-5 d-flex align-items-end">
+                            <input class="form-control keyboard" id="v_sesion" name="v_sesion">
+                            <p class="fw-bold mb-0 ms-2">minutos</p>
+                        </div>
+                    </div>
 
                     <input type="hidden" id="file_input" name="file_input">
                     <input type="hidden" id="id_estacion" name="id_estacion">

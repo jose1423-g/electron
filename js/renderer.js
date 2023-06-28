@@ -79,4 +79,3 @@ function updateCarousel() {
 
 // Actualizar el carrusel inicialmente
 updateCarousel()
-
