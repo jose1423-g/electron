@@ -1,73 +1,125 @@
+let index = document.getElementById('index');
+let main = document.getElementById('main');
 let audio;
 let reproduciendo = false;
-let duracionFormateada;
-let interval = setInterval(StartAudioIndex, 20000) //10 segundos
+let audio_main;
+let reproduciendo_main = false;
 
 function StartAudioIndex() {
     audio = new Audio("https://manzdev.github.io/codevember2017/assets/eye-tiger.mp3");
+    audio.currentTime = 0;
     audio.play()
     reproduciendo = true;
-
-    audio.addEventListener('play', function () {
-        console.log('reproduciendo')
-    })
-    audio.addEventListener('pause', function () {
-        console.log('Audio en pausa');
-    })
-    //cuando termina de reproducirse el video cambia la variable a false
+    clearTimeout(timeout)
+    //cuando termina de reproducirse el audio cambia la variable a false y reinicia la funcion 
     audio.onended = function() {
         reproduciendo = false;
+        TimeAudio();
     };
 }
 
-function  RestarAudio() {
+function RestarAudio() {
     if (audio !== null) {
         audio.pause();
         audio.currentTime = 0;
         audio.play()
+        //cuando se termine de reproducir el audio pone pausa y ejecuta la funcion TimeAudio
         audio.addEventListener('ended', function () {
-            console.log('termino de reproducirse');
-            clearInterval(interval);
+            audio.pause();
+            TimeAudio();
         })
       }
 } 
 
-//detiene el audio
-function StopAudio() {
-    if (audio !== null) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-}
-
-//cuando le den click manda a llamar la funcion StartAudioIndex() si la funcion ya habia sido llamada, se llamara a la funcion RestarAudio
-function Start() {
-    if (reproduciendo) {
-        console.log("true")
-        RestarAudio()
-    } else {
-        StartAudioIndex()
-        console.log("false")
+let timeout;
+function TimeAudio() {
+    if (!reproduciendo) {
+        timeout =  setTimeout(function  () {
+            StartAudioIndex()       
+        }, 30000)
     }
 }
 
-document.addEventListener('click', Start)
+if (index) {
+    TimeAudio();    
+}
 
+function Start() {
+    if (reproduciendo) {
+        RestarAudio()
+        document.removeEventListener('click', Start)
+        audio.addEventListener('ended', function () {
+            document.addEventListener('click', Start)
+        })
+    } else {
+        StartAudioIndex()
+        document.removeEventListener('click', Start)
+        audio.addEventListener('ended', function () {
+            document.addEventListener('click', Start)
+        })
+    }
+}
 
+//MAIN
+function StartAudioMain() {
+    audio_main = new Audio("../audio/audio.mpeg");
+    audio_main.currentTime = 0;
+    audio_main.play()
+    reproduciendo_main = true;
+    clearTimeout(timeoutMain)
+    //cuando termina de reproducirse el audio cambia la variable a false y reinicia la funcion 
+    audio_main.onended = function() {
+        reproduciendo_main = false;
+        TimeAudioMain();
+    };
+}
 
-// audio.addEventListener('loadedmetadata', function() {
-// Obtiene la duración del audio en segundos
-//     const duracion = audio.duration;
-// Convierte la duración a un formato legible para humanos (por ejemplo, minutos y segundos)
-//     duracionFormateada = formatearDuracion(duracion);
+function RestarAudioMain() {
+    if (audio_main !== null) {
+        audio_main.pause();
+        audio_main.currentTime = 0;
+        audio_main.play()
+        //cuando se termine de reproducir el audio pone pausa y ejecuta la funcion TimeAudio
+        audio_main.addEventListener('ended', function () {
+            audio.pause();
+            TimeAudioMain();
+        })
+      }
+}
 
-// Imprime la duración del audio
-//     console.log(`Duración del audio: ${duracionFormateada}`);
+//main
+let timeoutMain;
+function TimeAudioMain() {
+    if (!reproduciendo) {
+        timeoutMain =  setTimeout(function  () {
+            StartAudioMain()       
+        }, 30000) 
+    }
+}
+if (main) {
+    TimeAudioMain();    
+}
 
-// });
+//main
+function StartMain() {
+    if (reproduciendo_main) {
+        RestarAudioMain()
+        document.removeEventListener('click', StartMain)
+        audio_main.addEventListener('ended', function () {
+            document.addEventListener('click', Start)
+        })
+    } else {
+        StartAudioMain()
+        document.removeEventListener('click', StartMain)
+        audio_main.addEventListener('ended', function () {
+            document.addEventListener('click', Start)
+        })
+    }
+}
 
-// function formatearDuracion(duracion) {
-//     const minutos = Math.floor(duracion / 60);
-//     const segundos = Math.floor(duracion % 60);
-//     return `${minutos}:${segundos}`;
-//   }
+if (index) {
+    document.addEventListener('click', Start)    
+}
+if (main) {
+    document.addEventListener('click', StartMain)
+}

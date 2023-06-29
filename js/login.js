@@ -2,15 +2,21 @@ const form_admin = document.getElementById('form_admin')
 const btn_save = document.getElementById('btn_save');
 const btn_login = document.getElementById('btn_login')
 const btn_conect = document.getElementById('btn_conect')
-const input_path = document.getElementById('file');
+// const input_path = document.getElementById('file');
+
+
+const fileInput = document.getElementById('file_logo');
 const img_file = document.getElementById('img_file');
+const file_input = document.getElementById('file_input')
+
+const video_file = document.getElementById('video_file');
+const fileInputVideo = document.getElementById('file_video');
+const video_path = document.getElementById('video_path')
 
 const texto = document.getElementById('TextoBienvenida')
-const fileInput = document.getElementById('file_logo');
 const usuario = document.getElementById('Usuario')
 const pass = document.getElementById('pass')
 const estacion = document.getElementById('Estacion')
-const file_input = document.getElementById('file_input')
 const alert_warning = document.getElementById('alert_warning')
 const alert_danger = document.getElementById('alert_danger')
 const login_form = document.getElementById('login_form')
@@ -58,10 +64,12 @@ function show_data() {
         var password = ""
         var station = ""
         var IdEstacion = ""
+        var video = ""
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
             texto_bienvenida = element.TextoBienvenida
             logo = element.file 
+            video = element.file_video
             user = element.Usuario 
             password = element.pass
             station = element.Estacion 
@@ -75,6 +83,12 @@ function show_data() {
         }
         if (img_file) {
             img_file.src = logo   
+        }
+        if (video_file) {
+            video_file.src = video
+        }
+        if (video_path) {
+            video_path.value = video
         }
         if (usuario) {
             usuario.value = user
@@ -97,22 +111,40 @@ function show_data() {
 onload = show_data
 
 async function registro() {    
+    //file_img
     const path = (fileInput.files.length != 0) ? fileInput.files[0].path : '';
     const path1  = file_input.value
     fileInput.disabled = true
+    //file_video
+    const path_video = (fileInputVideo.files.length != 0) ? fileInputVideo.files[0].path : '';
+    const path_video1  = video_path.value
+    fileInputVideo.disabled = true
+
     const dataform = new FormData(form_admin)
-    if (path == '') {
+
+    if (path == '' && path_video == '') {
         dataform.append('file', path1)
+        dataform.append('file_video', path_video1)
         const formDataObject = Object.fromEntries(dataform.entries());
         const login = await window.saveform.register(formDataObject)
-        fileInput.disabled = false   
+        fileInput.disabled = false  
         img_file.src = path1;
+
+        //VIDEO
+        fileInputVideo.disabled = false
+        video_file.src = path_video1
+        
     } else {
         dataform.append('file', path)
+        dataform.append('file_video', path_video)
         const formDataObject = Object.fromEntries(dataform.entries());
         const login = await window.saveform.register(formDataObject)
         fileInput.disabled = false   
         img_file.src = path;
+
+        //VIDEO
+        fileInputVideo.disabled = false
+        video_file.src = path_video;
     }
 }
 

@@ -4,6 +4,7 @@ const texto_bienvenida  = document.getElementById('texto-bienvenida')
 const icon = document.getElementById('info')
 const btn_close = document.getElementById('btn_close')
 const modal = document.getElementById('modal_local')
+const content_video = document.getElementById('content_video')
 
 const carouselContainer = document.querySelector('.carousel-container');
 const carouselItems = document.querySelectorAll('.carousel-item1');
@@ -34,9 +35,11 @@ function datos() {
     }).then(json => {
         var file = ""
         var bienvenida = ""
+        var video = ""
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
             file  = element.file
+            video = element.file_video
             bienvenida = element.TextoBienvenida
         }
         if (bienvenida == '') {
@@ -44,7 +47,14 @@ function datos() {
         } else {
             texto_bienvenida.innerHTML = bienvenida                
         }
-        logo.src = file            
+        if (video == '') {
+            logo.src = file           
+            content_video.style.display = "none"
+        } else {
+            content_video.src = video
+            logo.style.display = "none"
+        }
+
     })
     .catch(error => {
         texto_bienvenida.innerHTML = 'Por favor configure su mensaje de bienvenida'

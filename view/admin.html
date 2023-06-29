@@ -30,14 +30,24 @@
                     </div>
 
                     <div class="row align-items-center mb-2">
-                        <label for="logo" class="form-label col-sm-4">Logo o imagen publicitaria</label> 
+                        <label for="file_logo" class="form-label col-sm-4">Logo o imagen publicitaria</label> 
                         <div class="col-8">
                             <input type="file" class="form-control" id="file_logo" name="file_logo">
                         </div>
                         <div class="col-4">
-                            <img src="" alt="" id="img_file" width="100px" height="auto">
+                            <img id="img_file" width="100px" height="auto">
                         </div>
-                    </div>          
+                    </div> 
+                    
+                    <div class="row align-items-center mb-2">
+                        <label for="file_video" class="form-label col-sm-4">Video</label> 
+                        <div class="col-8">
+                            <input type="file" class="form-control" id="file_video" name="file_video">
+                        </div>
+                        <div class="col-4">
+                            <video autoplay muted id="video_file" width="100px" height="auto"></video>
+                        </div>
+                    </div> 
                     
                     <div class="row align-items-center mb-2">
                         <label for="v_sesion" class="form-label col-sm-4">Vigencia de sesion</label>
@@ -48,6 +58,7 @@
                     </div>
 
                     <input type="hidden" id="file_input" name="file_input">
+                    <input type="hidden" id="video_path" name="video_path">
                     <input type="hidden" id="id_estacion" name="id_estacion">
 
                     <h3 class="text-primary">Conexíon</h3>

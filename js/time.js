@@ -9,15 +9,20 @@ function show_data() {
   }).then(json => {
       let json_minutos = json[0].v_sesion
       let minutos = 10;      
-      minutos = json_minutos;
+      if (json_minutos == '') {
+      //muestra la variable minutos  
+        if (time) {
+          time.innerHTML = minutos            
+        }  
+      } else {
+          minutos = json_minutos;
+          if (time) {
+            time.innerHTML = minutos            
+          }  
+      }
 
       //cada 60 segundos se llama a la funcion restarMinuto
       let tiempo = setInterval(restarMinuto, 60000);
-
-      //muestra la variable minutos  
-      if (time) {
-        time.innerHTML = minutos            
-      }
 
       //esta funcion se llama cada 60 segundos
       function restarMinuto() {
