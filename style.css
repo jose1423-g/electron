@@ -71,8 +71,9 @@ tbody, td{
 }
 
 .carousel-item1 img {
-    width: 25rem;
-    height: 15rem;
+    width: 20rem;
+    height: 18rem;
+    border-radius: 1rem;
     margin: 0 auto;
 }
 

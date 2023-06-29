@@ -1,7 +1,11 @@
 const {ipcRenderer} = require('electron')
 
 window.saveform = {
-    register: (data) => ipcRenderer.send('register',data) 
+    register: (data) => ipcRenderer.send('register',data),
+}
+
+window.filedelete = {
+  delete: (data) => ipcRenderer.send('delete',data)
 }
 
 window.dataprint = {

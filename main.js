@@ -12,7 +12,7 @@ const createindexWindow = () => {
     title: 'eDoxSat',
     width: 800,
     height: 600,
-    kiosk: true,
+    // kiosk: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -22,7 +22,7 @@ const createindexWindow = () => {
 
   index.loadFile('./view/index.html')
   vkb = new VirtualKeyboard(index.webContents)
-  index.removeMenu()
+  // index.removeMenu()
 }
 
 const createprintWindow = (url) => {
@@ -104,4 +104,19 @@ ipcMain.on('register', (event, data) => {
     title: 'Guardado exitoso',
     message: 'Los datos se han guardado correctamente.'
   });
+});
+
+ipcMain.on('delete', (event, data) => {
+
+  //old
+  let jsonData = [];
+  if (fs.existsSync(filePath)) {
+    const fileData = fs.readFileSync(filePath);
+  }
+
+  // Agregar los nuevos datos al arreglo existente
+  jsonData.push(data);
+
+  // Guardar los datos actualizados en el archivo JSON
+  fs.writeFileSync(filePath, JSON.stringify(jsonData, null, 2));
 });

@@ -36,16 +36,18 @@
                         </div>
                         <div class="col-4">
                             <img id="img_file" width="100px" height="auto">
+                            <button type="button" class="btn btn-danger fw-bold" id="delete_img">X</button>
                         </div>
                     </div> 
                     
-                    <div class="row align-items-center mb-2">
+                    <div class="row align-items-center mb-3">
                         <label for="file_video" class="form-label col-sm-4">Video</label> 
                         <div class="col-8">
                             <input type="file" class="form-control" id="file_video" name="file_video">
                         </div>
                         <div class="col-4">
-                            <video autoplay muted id="video_file" width="100px" height="auto"></video>
+                            <video autoplay loop muted id="video_file" width="100px" height="auto"></video>
+                            <button type="button" class="btn btn-danger fw-bold" id="delete_video">X</button>
                         </div>
                     </div> 
                     
@@ -87,7 +89,7 @@
                         <button type="button" class="btn btn-success me-2" id="btn_conect">Conectar</button>
                         <button type="button" class="btn btn-primary me-2" id="btn_save">Guardar</button>
                         <a href="login.html" class="btn btn-secondary me-2">Volver</a>
-                        <button type="button" class="btn btn-danger" id="cerrar">Cerrar</button>
+                        <button type="button" class="btn btn-danger" id="cerrar">Cerrar app</button>
                     </div>
                 </div>
             </div>

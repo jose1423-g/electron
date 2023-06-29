@@ -2,7 +2,10 @@ const form_admin = document.getElementById('form_admin')
 const btn_save = document.getElementById('btn_save');
 const btn_login = document.getElementById('btn_login')
 const btn_conect = document.getElementById('btn_conect')
-// const input_path = document.getElementById('file');
+
+const btn_img_delete = document.getElementById('delete_img');
+const btn_video_delete = document.getElementById('delete_video');
+
 
 
 const fileInput = document.getElementById('file_logo');
@@ -13,6 +16,7 @@ const video_file = document.getElementById('video_file');
 const fileInputVideo = document.getElementById('file_video');
 const video_path = document.getElementById('video_path')
 
+const v_sesion = document.getElementById('v_sesion')
 const texto = document.getElementById('TextoBienvenida')
 const usuario = document.getElementById('Usuario')
 const pass = document.getElementById('pass')
@@ -27,6 +31,14 @@ const cerrar = document.getElementById('cerrar')
 
 if (btn_login) {
     btn_login.addEventListener('click', login)
+}
+
+if (btn_img_delete) {
+    btn_img_delete.addEventListener('click', DeleteFileImg)
+}
+
+if (btn_video_delete) {
+    btn_video_delete.addEventListener('click', DeleteFileVideo)
 }
 
 if (btn_save) {
@@ -65,6 +77,7 @@ function show_data() {
         var station = ""
         var IdEstacion = ""
         var video = ""
+        var time = ""
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
             texto_bienvenida = element.TextoBienvenida
@@ -74,7 +87,21 @@ function show_data() {
             password = element.pass
             station = element.Estacion 
             IdEstacion = element.id_estacion
+            time = element.v_sesion
         }
+        if (logo == '') {
+            btn_img_delete.style.display = "none"
+        } else {
+            btn_img_delete.style.display = "inline"
+        }
+        if (video == '') {
+            btn_video_delete.style.display = "none"
+            video_file.style.display = "none"
+        } else {
+            btn_video_delete.style.display = "inline"
+            video_file.style.display = ""
+        }
+        
         if (texto) {
             texto.value = texto_bienvenida            
         }
@@ -102,9 +129,15 @@ function show_data() {
         if (id_estacion) {
             id_estacion.value = IdEstacion
         }
+        if (v_sesion) {
+            v_sesion.value = time
+        }
     })
     .catch(error => {
         console.error(error);
+        btn_img_delete.style.display = "none"
+        btn_video_delete.style.display = "none"
+        video_file.style.display = "none"
     });
 }
 
@@ -133,6 +166,8 @@ async function registro() {
         //VIDEO
         fileInputVideo.disabled = false
         video_file.src = path_video1
+        show_data()
+
         
     } else {
         dataform.append('file', path)
@@ -145,7 +180,50 @@ async function registro() {
         //VIDEO
         fileInputVideo.disabled = false
         video_file.src = path_video;
+        show_data()
     }
+}
+
+async function DeleteFileImg() {    
+      //file_img
+      const path = (fileInput.files.length != 0) ? fileInput.files[0].path : '';
+      const path1  = file_input.value = ''
+      fileInput.disabled = true
+      //file_video
+      const path_video = (fileInputVideo.files.length != 0) ? fileInputVideo.files[0].path : '';
+      const path_video1  = video_path.value
+      fileInputVideo.disabled = true
+  
+      const dataform = new FormData(form_admin)
+  
+          dataform.append('file', path1)
+          dataform.append('file_video', path_video1)
+          const formDataObject = Object.fromEntries(dataform.entries());
+          const del = await window.filedelete.delete(formDataObject)
+          fileInput.disabled = false  
+          fileInput.value = "";
+          img_file.src = path1;
+}
+
+async function DeleteFileVideo() {    
+      //file_img
+      const path = (fileInput.files.length != 0) ? fileInput.files[0].path : '';
+      const path1  = file_input.value = ''
+      fileInput.disabled = true
+      //file_video
+      const path_video = (fileInputVideo.files.length != 0) ? fileInputVideo.files[0].path : '';
+      const path_video1  = video_path.value = ""
+      fileInputVideo.disabled = true
+  
+      const dataform = new FormData(form_admin)
+  
+          dataform.append('file', path)
+          dataform.append('file_video', path_video1)
+          const formDataObject = Object.fromEntries(dataform.entries());
+          const del = await window.filedelete.delete(formDataObject)
+          fileInputVideo.disabled = false
+          fileInputVideo.value = ""
+          video_file.src = path_video1
 }
 
 function login() {
