@@ -6,7 +6,7 @@ let audio_main;
 let reproduciendo_main = false;
 
 function StartAudioIndex() {
-    audio = new Audio("https://manzdev.github.io/codevember2017/assets/eye-tiger.mp3");
+    audio = new Audio("../audio/Paso1.mp4");
     audio.currentTime = 0;
     audio.play()
     reproduciendo = true;
@@ -36,7 +36,7 @@ function TimeAudio() {
     if (!reproduciendo) {
         timeout =  setTimeout(function  () {
             StartAudioIndex()       
-        }, 30000)
+        }, 60000)
     }
 }
 
@@ -62,7 +62,7 @@ function Start() {
 
 //MAIN
 function StartAudioMain() {
-    audio_main = new Audio("../audio/audio.mpeg");
+    audio_main = new Audio("../audio/Paso2.mp4");
     audio_main.currentTime = 0;
     audio_main.play()
     reproduciendo_main = true;
@@ -87,20 +87,18 @@ function RestarAudioMain() {
       }
 }
 
-//main
 let timeoutMain;
 function TimeAudioMain() {
     if (!reproduciendo) {
         timeoutMain =  setTimeout(function  () {
             StartAudioMain()       
-        }, 30000) 
+        }, 60000) 
     }
 }
 if (main) {
     TimeAudioMain();    
 }
 
-//main
 function StartMain() {
     if (reproduciendo_main) {
         RestarAudioMain()

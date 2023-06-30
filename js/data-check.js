@@ -60,7 +60,7 @@ function datos() {
 }
 
 if (user) {
-    onload = datos
+    datos();
 }
 
 //get referencia of index.html

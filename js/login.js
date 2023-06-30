@@ -141,7 +141,7 @@ function show_data() {
     });
 }
 
-onload = show_data
+show_data();
 
 async function registro() {    
     //file_img

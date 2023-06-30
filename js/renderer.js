@@ -61,7 +61,7 @@ function datos() {
         console.error(error);
     });
 }
-onload = datos
+datos();
 
 let currentIndex = 0;
 
@@ -88,4 +88,4 @@ function updateCarousel() {
 }
 
 // Actualizar el carrusel inicialmente
-updateCarousel()
+updateCarousel();
