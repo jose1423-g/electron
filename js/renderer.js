@@ -58,7 +58,8 @@ function datos() {
     })
     .catch(error => {
         texto_bienvenida.innerHTML = 'Por favor configure su mensaje de bienvenida'
-        console.error(error);
+        content_video.style.display = "none"
+        // console.error(error);
     });
 }
 datos();

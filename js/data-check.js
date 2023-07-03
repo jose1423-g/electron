@@ -16,6 +16,7 @@ let lista_tickets_all = document.getElementById("lista_tickets_all")
 let lista_rfc = document.getElementById('lista-rfc')
 let container_rfc = document.getElementById('container-rfc')
 let val_rfc = document.getElementById('RFC')
+let cif_val = document.getElementById('cif_val')
 let val_referencia = document.getElementById("referencia")
 let body = document.getElementById('body')
 let comprobantes = document.getElementById("comprobantes")
@@ -55,7 +56,7 @@ function datos() {
         pass.value = password
     })
     .catch(error => {
-        console.error(error);
+        // console.error(error);
     });
 }
 
@@ -74,15 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
     var array1 = JSON.parse(array_all);
     var array2 = JSON.parse(array_total);
     var array3 = JSON.parse(array_clean)
+    
+    if (array1 && array2 && array3) {
+        var valor_ticket_all = array1[0].toString()          
+        var valor_total = array2[0].toString()
+        var valor_clean = array3[0].toString()   
 
-
-    var valor_ticket_all = array1[0].toString()          
-    var valor_total = array2[0].toString()
-    var valor_clean = array3[0].toString()
-
-    a_tickets_all.push(valor_ticket_all)
-    a_total.push(valor_total)
-    a_ticket_clean.push(valor_clean)
+        a_tickets_all.push(valor_ticket_all)
+        a_total.push(valor_total)
+        a_ticket_clean.push(valor_clean) 
+    }
 
     show_tickets()
     show_total()
@@ -134,24 +136,31 @@ if (referencia) {
 if (rfc) {    
     rfc.addEventListener('keypress', function (event) {
         if(event.key === "Enter"){
-            rfc = val_rfc.value
-            if (rfc.length >= 7) {
-                datarfc()
-                get_uso_cfdi()
-                get_regimen_fiscal()
-                container_rfc.classList.remove("none");
-                body.classList.add("body-content")
+            rfc = val_rfc.value.substring(0, 23)
+            if (window.btoa(val_rfc.value.substring(0, 23).toUpperCase()) == 'SFRUUFM6Ly9TSUFULlNBVC5HT0IuTVg=') {
+                datarfcCIF()
             } else {
-                container_rfc.classList.add("none")
-                alert_info.innerHTML = 'Debe ingresar al menos 7 caracteres'
-                alert_info.classList.remove('none')
-                setTimeout( function () {
-                    alert_info.classList.add('none')                
-                }, 3000)
+                if (rfc.length >= 7) {
+                    datarfc()
+                    get_uso_cfdi()
+                    get_regimen_fiscal()
+                    container_rfc.classList.remove("none");
+                    cif_val.value = ''
+                    //agrega la clase al body para cuando le des clik se oculte los resultados del rfc 
+                    body.classList.add("body-content")
+                } else {
+                    container_rfc.classList.add("none")
+                    alert_info.innerHTML = 'Debe ingresar al menos 7 caracteres'
+                    alert_info.classList.remove('none')
+                    setTimeout( function () {
+                        alert_info.classList.add('none')                
+                    }, 3000)
+                }
             }
         }
     })
 }
+
 // crear un evento que al darle click oculte la lista-rfc al darle click al body
 if (body) {
     body.addEventListener('click', remove_class)
@@ -182,12 +191,10 @@ if (generar_factura) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('datos '+data)
             respuesta = data.result;
             msg = data.msg;
             if (respuesta == 1) {
                 window.location.href = "timbrado.html"
-                console.log('resp 1 '+ data)
                 var printurl = JSON.stringify(data.PrintUrl);
                 var arrayQueryString = '?PrintUrl=' + encodeURIComponent(printurl);
                 window.location.href = 'timbrado.html' + arrayQueryString;  
@@ -312,6 +319,38 @@ function datarfc() {
             lista += element 
         }
         lista_rfc.innerHTML = lista        
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+//get data RFC wiht a url
+function datarfcCIF() {
+    let  RFC = document.getElementById('RFC').value
+    var ticket = {
+        f_name: 'getDataFromCif',
+        string: RFC,
+        D2: '1',
+        D3: '21080252780_RBL210812JM6',
+        app: 'autofactura_web'
+    }
+    fetch("https://gasofac.mx/ria/get_data_from_cif.php", {
+        method: 'POST',
+        body: JSON.stringify(ticket),
+    }).then(function(data) {
+        return data.json()  
+    }).then(json => {
+        val_rfc.value = json.rfc
+        razon_social.value = json.nombre
+        regimen_fiscal.value = json.cd_regimen
+        email.value = json.email
+        codigo_postal.value = json.codigo_postal
+        cif_val.value = json.cif
+        uso_cfdi.value = ''
+        forma_pago_fija.value = ''
+
+
+
     })
     .catch(error => {
         console.error(error);

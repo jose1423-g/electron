@@ -81,7 +81,7 @@ function RestarAudioMain() {
         audio_main.play()
         //cuando se termine de reproducir el audio pone pausa y ejecuta la funcion TimeAudio
         audio_main.addEventListener('ended', function () {
-            audio.pause();
+            audio_main.pause();
             TimeAudioMain();
         })
       }
