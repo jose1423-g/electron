@@ -34,6 +34,8 @@ const alert_warning = document.getElementById('alert_warning')
 const user = document.getElementById('User')
 const IdEstacion = document.getElementById('IdEstacion')
 const pass = document.getElementById('pass')
+const loading_modal = document.getElementById('loading_modal')
+
 
 //get data from file config.json
 function datos() {
@@ -138,6 +140,8 @@ if (rfc) {
             rfc = val_rfc.value.substring(0, 23)
             if (window.btoa(val_rfc.value.substring(0, 23).toUpperCase()) == 'SFRUUFM6Ly9TSUFULlNBVC5HT0IuTVg=') {
                 datarfcCIF()
+                get_regimen_fiscal()
+                loading_modal.classList.add('d-flex')
             } else {
                 if (rfc.length >= 7) {
                     datarfc()
@@ -183,6 +187,8 @@ document.addEventListener('click', function(event) {
 //GENERAR FACTURA
 if (generar_factura) {
     generar_factura.addEventListener('click', function () {
+        /* mostrar modal */
+        loading_modal.classList.add('d-flex')
         const formdata = new FormData(billing_form);
         fetch('https://gasofac.mx/ria/solicitar-factura.php', {
             method: 'POST',
@@ -192,6 +198,7 @@ if (generar_factura) {
         .then(data => {
             respuesta = data.result;
             msg = data.msg;
+            loading_modal.classList.remove('d-flex')
             if (respuesta == 1) {
                 window.location.href = "timbrado.html"
                 var printurl = JSON.stringify(data.PrintUrl);
@@ -339,6 +346,7 @@ function datarfcCIF() {
     }).then(function(data) {
         return data.json()  
     }).then(json => {
+        loading_modal.classList.remove('d-flex')
         val_rfc.value = json.rfc
         razon_social.value = json.nombre
         regimen_fiscal.value = json.cd_regimen
