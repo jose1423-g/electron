@@ -141,6 +141,7 @@ if (rfc) {
             if (window.btoa(val_rfc.value.substring(0, 23).toUpperCase()) == 'SFRUUFM6Ly9TSUFULlNBVC5HT0IuTVg=') {
                 datarfcCIF()
                 get_regimen_fiscal()
+                get_uso_cfdi()
                 loading_modal.classList.add('d-flex')
             } else {
                 if (rfc.length >= 7) {
