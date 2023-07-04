@@ -237,7 +237,7 @@ function val_datacheck() {
         apc: 'AUT'
     }
 
-    fetch("https://gasofac.mx/ria/data_check_debug.php", {
+    fetch("https://gasofac.mx/ria/data_check.php", {
         method: 'POST',
         body: JSON.stringify(ticket),
     }).then(function(data) {
@@ -279,7 +279,7 @@ function datacheck() {
         apc: 'AUT'
     }
 
-    fetch("https://gasofac.mx/ria/data_check_debug.php", {
+    fetch("https://gasofac.mx/ria/data_check.php", {
         method: 'POST',
         body: JSON.stringify(ticket),
     }).then(function(data) {
@@ -313,7 +313,7 @@ function datarfc() {
         query_type: 'select2'
     }
 
-    fetch("https://gasofac.mx/ria/cte_debug.php", {
+    fetch("https://gasofac.mx/ria/cte.php", {
         method: 'POST',
         body: JSON.stringify(ticket),
     }).then(function(data) {
@@ -369,7 +369,7 @@ function get_uso_cfdi() {
         version_cfdi: '4.0'
     }
 
-    fetch("https://gasofac.mx/ria/get_usos_cfdi_debug.php", {
+    fetch("https://gasofac.mx/ria/get_usos_cfdi.php", {
         method: 'POST',
         body: JSON.stringify(ticket),
     }).then(function(data) {
@@ -395,7 +395,7 @@ function  get_regimen_fiscal() {
         version_cfdi: '4.0'
     }
 
-    fetch("https://gasofac.mx/ria/get_regimen_fiscal_debug.php", {
+    fetch("https://gasofac.mx/ria/get_regimen_fiscal.php", {
         method: 'POST',
         body: JSON.stringify(ticket),
     }).then(function(data) {
