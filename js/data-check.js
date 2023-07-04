@@ -84,12 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
         a_tickets_all.push(valor_ticket_all)
         a_total.push(valor_total)
         a_ticket_clean.push(valor_clean) 
+
+        show_tickets()
+        show_total()
+        show_tickets_clean()
     }
-
-    show_tickets()
-    show_total()
-    show_tickets_clean()
-
 });
 //get referencia of timbrado.html
 let print_url;
@@ -348,9 +347,6 @@ function datarfcCIF() {
         cif_val.value = json.cif
         uso_cfdi.value = ''
         forma_pago_fija.value = ''
-
-
-
     })
     .catch(error => {
         console.error(error);

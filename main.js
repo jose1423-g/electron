@@ -45,12 +45,12 @@ const createprintWindow = (url) => {
         copies: 1
       })
         .then(() => {
-          // console.log('La impresion se ha completado.');
+          console.log('La impresion se ha completado.');
           try {
             fs.unlinkSync(pdfPath)            
-            // console.log('Archivo borrado correctamente')
+            console.log('Archivo borrado correctamente')
           } catch (error) {
-            // console.log('Error al borrar el archivo'. error)
+            console.log('Error al borrar el archivo'. error)
           }
         })
         .catch(error => {
