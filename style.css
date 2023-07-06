@@ -1,6 +1,9 @@
 tbody, td{
     padding: 0px;
 }
+.font_h1{
+    font-size: 4.5rem;
+}
 .content-list-rfc{
     width: 40rem;
     max-height: 300px;

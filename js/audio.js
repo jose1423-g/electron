@@ -6,7 +6,7 @@ let audio_main;
 let reproduciendo_main = false;
 
 function StartAudioIndex() {
-    audio = new Audio("../audio/Paso1.mp4");
+    audio = new Audio("../audio/Paso1.aac");
     audio.currentTime = 0;
     audio.play()
     reproduciendo = true;
@@ -62,7 +62,7 @@ function Start() {
 
 //MAIN
 function StartAudioMain() {
-    audio_main = new Audio("../audio/Paso2.mp4");
+    audio_main = new Audio("../audio/Paso2.aac");
     audio_main.currentTime = 0;
     audio_main.play()
     reproduciendo_main = true;

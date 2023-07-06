@@ -10,8 +10,8 @@ let index;
 const createindexWindow = () => {
     index = new BrowserWindow({
     title: 'eDoxSat',
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
     kiosk: true,
     webPreferences: {
       nodeIntegration: true,

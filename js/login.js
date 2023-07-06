@@ -48,7 +48,8 @@ if (btn_save) {
 if (login_form) {
     login_form.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-          event.preventDefault();
+            login();
+            event.preventDefault();
         }
     })
 }
@@ -90,16 +91,24 @@ function show_data() {
             time = element.v_sesion
         }
         if (logo == '') {
-            btn_img_delete.style.display = "none"
+            if (btn_img_delete) {
+                btn_img_delete.style.display = "none"                
+            }
         } else {
-            btn_img_delete.style.display = "inline"
+            if (btn_img_delete) {
+                btn_img_delete.style.display = "inline"                
+            }
         }
         if (video == '') {
-            btn_video_delete.style.display = "none"
-            video_file.style.display = "none"
+            if (btn_video_delete) {
+                btn_video_delete.style.display = "none"                
+                video_file.style.display = "none"
+            }
         } else {
-            btn_video_delete.style.display = "inline"
-            video_file.style.display = ""
+            if (btn_video_delete) {
+                btn_video_delete.style.display = "inline"
+                video_file.style.display = ""    
+            }
         }
         
         if (texto) {
@@ -135,9 +144,15 @@ function show_data() {
     })
     .catch(error => {
         console.error(error);
-        btn_img_delete.style.display = "none"
-        btn_video_delete.style.display = "none"
-        video_file.style.display = "none"
+        if (btn_img_delete) {
+            btn_img_delete.style.display = "none"            
+        }
+        if (btn_video_delete) {
+            btn_video_delete.style.display = "none"            
+        }
+        if(video_file){
+            video_file.style.display = "none"
+        }
     });
 }
 
