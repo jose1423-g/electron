@@ -58,7 +58,12 @@ function datos() {
         pass.value = password
     })
     .catch(error => {
-        // console.error(error);
+        console.error(error);
+        alert_index.innerHTML = 'Ups algo salio mal :('
+        alert_index.classList.remove('none')
+        setTimeout( function () {
+            alert_index.classList.add('none')
+        }, 3000) 
     });
 }
 
@@ -214,7 +219,7 @@ if (generar_factura) {
             }
         })
         .catch(error => {
-            console.error(error);
+            // console.error(error);
         });
     })
 }
