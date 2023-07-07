@@ -104,13 +104,13 @@ function StartMain() {
         RestarAudioMain()
         document.removeEventListener('click', StartMain)
         audio_main.addEventListener('ended', function () {
-            document.addEventListener('click', Start)
+            document.addEventListener('click', StartMain)
         })
     } else {
         StartAudioMain()
         document.removeEventListener('click', StartMain)
         audio_main.addEventListener('ended', function () {
-            document.addEventListener('click', Start)
+            document.addEventListener('click', StartMain)
         })
     }
 }
