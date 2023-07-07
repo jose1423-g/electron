@@ -1,6 +1,14 @@
 tbody, td{
     padding: 0px;
 }
+.text-shadow{
+    text-shadow: 1px 0px 15px #aab0b5;
+}
+/* Ajusta el valor según tus necesidades */
+.virtual-keyboard {
+    transform: scale(1.2); 
+    margin-top: 2rem;
+}
 .font_h1{
     font-size: 4.5rem;
 }
@@ -74,7 +82,7 @@ tbody, td{
 }
 
 .carousel-item1 img {
-    width: 20rem;
+    width: 15rem;
     height: 18rem;
     border-radius: 1rem;
     margin: 0 auto;

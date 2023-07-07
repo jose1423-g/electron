@@ -8,7 +8,7 @@ const teclado = $('.keyboard').keyboard({
   theme: '',
   layout: 'us-en', 
   autoPosition: true,
-  displayOnFocus: true
+  displayOnFocus: true,
 })
 
 //quita el teclado al darle enter al rfc
