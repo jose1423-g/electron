@@ -245,6 +245,7 @@ function val_datacheck() {
         return data.json()  
     }).then(myjson => {
         let ret = myjson.ret;
+        let msg = myjson.msg_err
         if (ret == 1) {
             let total = myjson.Total
             let dato = '<div class="col-7 mt-2">'+myjson.Ticket_ori+'</div><div class="col-3 mt-2">'+myjson.Total+'</div>'
@@ -258,7 +259,7 @@ function val_datacheck() {
             var arrayQueryString = '?a_tickets_all=' + encodeURIComponent(array_all) + '&a_total=' + encodeURIComponent(array_total) + '&a_ticket_clean=' + encodeURIComponent(array_clean);
             window.location.href = 'main.html' + arrayQueryString;            
         } else {
-            alert_index.innerHTML = 'La referencia no es valida'
+            alert_index.innerHTML = msg
             alert_index.classList.remove('none')
             setTimeout( function () {
                 alert_index.classList.add('none')
