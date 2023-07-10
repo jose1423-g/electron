@@ -80,6 +80,7 @@ ipcMain.handle('files:print',(event, url) => {
 
 //cierra la app
 ipcMain.handle('closeapp:close', async () => {
+  app.quit()
   index.close()
 })
 
