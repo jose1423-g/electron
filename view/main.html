@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />    
-    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link href="../node_modules/electron-virtual-keyboard/virtual-keyboard.css" rel="stylesheet" />
-
-
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body id="body">
 
-  <div class="position-fixed start-0 top-0 mx-2 mt-1" id="main">
+  <div class="position-fixed start-0 top-0 mx-2 mt-1 bg-white" id="main">
     <p class="mb-1"><strong>Tiempo restante</strong></p>  
     <div class="rounded bg-light px-1 py-1 text-center text-danger">
       <span class="p-0 m-0" id="time"></span>
@@ -20,7 +18,7 @@
 
   <div class="container-xl mt-3">
       <div class="row">
-        <div class="col d-flex justify-content-center align-items-center flex-row-reverse mb-4">
+        <div class="col d-flex justify-content-center align-items-center flex-row-reverse mb-2">
           <h1 class="ms-2 fw-bold text-primary mb-0 font_h1">AutoFAC</h1>
           <img src="../img/logo-kisko.png" alt="logo" width="60px">
         </div>
@@ -28,7 +26,7 @@
       <form action="#" method="post" id="billing_form">
         <div class="row"> 
           
-          <div class="alert alert-info position-fixed top-0 start-0 none" id="alert_info" role="alert">holis</div>
+          <div class="alert alert-info position-fixed top-0 start-0 none" id="alert_info" role="alert"></div>
           <div class="alert alert-warning position-fixed top-0 start-0 none" id="alert_warning" role="alert"></div>
 
           <div class="col-6 ps-3 pe-0">
@@ -101,7 +99,7 @@
             <div class="row align-items-center mb-3">
               <label for="Observaciones" class="form-label col-sm-4">Observaciones:</label>
               <div class="col-7">
-                <textarea class="form-control keyboard" id="Observaciones" name="Observaciones" ></textarea>
+                <textarea class="form-control keyboard2" id="Observaciones" name="Observaciones" ></textarea>
               </div>
             </div>
 
@@ -132,7 +130,7 @@
             <div class="d-flex justify-content-center mb-4">
               <button type="button" class="btn btn-primary" id="generar_factura">Generar factura</button>
             </div>
-            <img src="../img/instrucciones.PNG" alt="" width="100%">
+            <img src="../img/constanciafiscal.PNG" alt="" width="100%">
           </div>
         </div>
       </form>
@@ -153,7 +151,7 @@
 
   <script src="../teclado.js"></script>
   <script src="../js/time.js"></script>
-  <script src="../js/audio.js"></script>
+  <!-- <script src="../js/audio.js"></script> -->
   <script src="../js/data-check.js"></script>
 </body>
 </html>
