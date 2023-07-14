@@ -15,6 +15,10 @@ const teclado = $('.keyboard').keyboard({
 let Observaciones = document.getElementById('Observaciones');
 let Referencia_index = document.getElementById('referencia_index');
 let email1 = document.getElementById('Email');
+let Pass = document.getElementById('pass');
+let Usuario = document.getElementById('Usuario');
+
+
 
 if (Observaciones) {
   Observaciones.addEventListener('focus', () => {
@@ -37,6 +41,24 @@ if (Referencia_index) {
 if (email1) {
   email1.addEventListener('focus', () => {
     const inputRect = email1.getBoundingClientRect();
+    const desiredPosition = inputRect.top;
+    const targetPosition = desiredPosition + window.pageYOffset;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+  });  
+}
+
+if (Pass) {
+  Pass.addEventListener('focus', () => {
+    const inputRect = Pass.getBoundingClientRect();
+    const desiredPosition = inputRect.top;
+    const targetPosition = desiredPosition + window.pageYOffset;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+  });  
+}
+
+if (Usuario) {
+  Usuario.addEventListener('focus', () => {
+    const inputRect = Usuario.getBoundingClientRect();
     const desiredPosition = inputRect.top;
     const targetPosition = desiredPosition + window.pageYOffset;
     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
