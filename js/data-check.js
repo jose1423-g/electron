@@ -59,11 +59,6 @@ function datos() {
     })
     .catch(error => {
         console.error(error);
-        alert_index.innerHTML = 'Ups algo salio mal :('
-        alert_index.classList.remove('none')
-        setTimeout( function () {
-            alert_index.classList.add('none')
-        }, 3000) 
     });
 }
 

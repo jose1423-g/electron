@@ -1,5 +1,4 @@
 const client = require('electron-virtual-keyboard/client.js');
-
 var jQuery = $ = require('jquery');
 require('electron-virtual-keyboard/client.js')(window, jQuery);
 
@@ -12,12 +11,40 @@ const teclado = $('.keyboard').keyboard({
   displayOnFocus: true,
 })
 
-const teclado2 = $('.keyboard2').keyboard({
-  theme: '',
-  layout: 'us-en', 
-  autoPosition: true,
-  displayOnFocus: true
-})
+
+let Observaciones = document.getElementById('Observaciones');
+let Referencia_index = document.getElementById('referencia_index');
+let email1 = document.getElementById('Email');
+
+if (Observaciones) {
+  Observaciones.addEventListener('focus', () => {
+    const inputRect = Observaciones.getBoundingClientRect();
+    const desiredPosition = inputRect.top;
+    const targetPosition = desiredPosition + window.pageYOffset;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+  });
+}
+
+if (Referencia_index) {
+  Referencia_index.addEventListener('focus', () => {
+    const inputRect = Referencia_index.getBoundingClientRect();
+    const desiredPosition = inputRect.top;
+    const targetPosition = desiredPosition + window.pageYOffset;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+  });
+}
+
+if (email1) {
+  email1.addEventListener('focus', () => {
+    const inputRect = email1.getBoundingClientRect();
+    const desiredPosition = inputRect.top;
+    const targetPosition = desiredPosition + window.pageYOffset;
+    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+  });  
+}
+
+
+
 
 //quita el teclado al darle enter al rfc
 if (RFC) {

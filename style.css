@@ -7,15 +7,6 @@ tbody, td{
 .text-shadow{
     text-shadow: 1px 0px 15px #aab0b5;
 }
-/* Ajusta el valor según tus necesidades */
-.virtual-keyboard {
-    transform: scale(1.2); 
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-}
 .font_h1{
     font-size: 4.3rem;
 }

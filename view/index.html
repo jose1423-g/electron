@@ -25,16 +25,15 @@
                 <h2 class="text-center text-primary" id="texto-bienvenida"></h2>
             </div>
             <div class="alert alert-info m-0 none" id="alert_index" role="alert"></div>
-            <div class="col-8 mb-4">
+            <div class="col-8 mb-2">
                 <div>
                     <label class="form-label mb-3" for="referencia_index">Teclee o escanee su referencia</label><span class="ms-2 question-icon pointer" id="info">?</span>
                     <input type="text" class="form-control keyboard" id="referencia_index">
                 </div>
             </div>
             <div class="col-12 text-center mb-0">
-                <img  alt="por favor configure su logo" class="rounded" width="550rem" height="350rem" id="logo-gasofac">
-                <video autoplay muted loop  width="650rem" height="350rem" id="content_video"></video>
-
+                <img  alt="por favor configure su logo" class="rounded" width="65%" id="logo-gasofac">
+                <video autoplay muted loop  width="60%" id="content_video"></video>
             </div>
         </div>
     </div>
@@ -54,10 +53,13 @@
         </div>  
         <div class="content-btn">
           <button class="btn btn-primary" id="prev-button">Anterior</button>
-          <button class="btn btn-danger mx-2" id="btn_close">Salir</button>
+          <button class="btn btn-danger mx-2" id="btn_close">Cerrar</button>
           <button class="btn btn-primary" id="next-button">Siguiente</button>
         </div>
     </div>
+    
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/electron-virtual-keyboard/src/client.js"></script>
     <script src="../js/renderer.js"></script>
     <script src="../js/data-check.js"></script>
     <script src="../js/audio.js"></script>

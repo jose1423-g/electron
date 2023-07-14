@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />    
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-    <link href="../node_modules/electron-virtual-keyboard/virtual-keyboard.css" rel="stylesheet" />
+    <link href="../node_modules/electron-virtual-keyboard/virtual-keyboard.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body id="body">
@@ -31,10 +31,14 @@
 
           <div class="col-6 ps-3 pe-0">
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="RFC" class="form-label pe-0 col-sm-4">RFC:</label>
-              <div class="col-7">
-                <input type="text" class="form-control keyboard" id="RFC" name="RFC">
+              <div class="col-8">
+                <div class="d-flex">
+                  <input type="text" class="form-control keyboard" id="RFC" name="RFC">
+                  <!-- <button type="button" class="btn btn-primary btn-sm rounded-2 ms-1 fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">?</button> -->
+                  <button type="button" class="btn btn-white"data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="question-icon">?</span></button>
+                </div>
                 <div class="content-list-rfc position-absolute overflow-auto bg-white border border-info none bg-white" id="container-rfc">
                   <ul class="list-group list-group-flush" id="lista-rfc"></ul>
                 </div>
@@ -46,42 +50,42 @@
             <input type="hidden" id="pass" name="pass">
             <input type="hidden" id="cif_val" name="cif_val">
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="RazonSocial" class="form-label col-sm-4">Razón social:</label> 
               <div class="col-7">
                 <input type="text" class="form-control keyboard" id="RazonSocial" name="RazonSocial" >
               </div>
             </div>
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="CodigoPostal" class="form-label col-sm-4">Código Postal:</label>
               <div class="col-7">
                 <input type="text" class="form-control keyboard" id="CodigoPostal" name="CodigoPostal" >
               </div>
             </div>
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="CdCfdiRegimen" class="form-label col-sm-4">Régimen fiscal:</label>
               <div class="col-7">
                 <select class="form-select" id="CdCfdiRegimen" name="CdCfdiRegimen"></select>
               </div>
             </div>
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="CdUsoCfdi" class="form-label col-sm-4">Uso CFDI:</label>
               <div class="col-7">
                 <select class="form-select" id="CdUsoCfdi" name="CdUsoCfdi"></select>
               </div>
             </div>
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="Email" class="form-label col-sm-4">Email:</label>
               <div class="col-7">
                 <input type="text" class="form-control keyboard" id="Email" name="Email" >
               </div>
             </div>
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="CfdiFormaPago" class="form-label col-sm-4">Forma de Pago:</label>
               <div class="col-7">
                 <select class="form-select" id="CfdiFormaPago" name="CfdiFormaPago">
@@ -96,10 +100,10 @@
               </div>
             </div>
 
-            <div class="row align-items-center mb-3">
+            <div class="row align-items-center mb-2">
               <label for="Observaciones" class="form-label col-sm-4">Observaciones:</label>
               <div class="col-7">
-                <textarea class="form-control keyboard2" id="Observaciones" name="Observaciones" ></textarea>
+                <textarea class="form-control keyboard" id="Observaciones" name="Observaciones"></textarea>
               </div>
             </div>
 
@@ -111,8 +115,7 @@
           </div>
 
           <div class="col-5">
-          
-            <div class="mb-3">
+            <div class="mb-2">
               <label for="referencia" class="form-label">Teclee o escanee su referencia</label>
               <input type="text" class="form-control keyboard" id="referencia" >
             </div>
@@ -123,17 +126,32 @@
               <div class="col-2">Remover</div>
             </div>
             <div class="row mt-2 content-referencia overflow-auto" id="lista_tickets_all"></div>
-            <div class="d-flex mt-3 mb-3">
+            <div class="d-flex mt-2 mb-2">
               <p class="me-3"><strong class="me-2">Comprobantes</strong>(<strong id="comprobantes">0</strong>)</p>
               <p><strong class="me-1">Total: $</strong><strong id="total">0.00</strong></p>
             </div>
             <div class="d-flex justify-content-center mb-4">
               <button type="button" class="btn btn-primary" id="generar_factura">Generar factura</button>
             </div>
-            <img src="../img/constanciafiscal.PNG" alt="" width="100%">
+            <!-- <img src="../img/constanciafiscal.PNG" alt="" width="70%"> -->
           </div>
         </div>
       </form>
+      
+      <!-- modal IMG -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <img src="../img/constanciafiscal.PNG" class="img-fluid" alt="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- modal -->
       <div class="modal opacity-75 bg-white" tabindex="-1" id="loading_modal">
         <div class="modal-dialog  modal-fullscreen">
@@ -149,9 +167,11 @@
       <a class="btn btn-info text-white position-absolute z-30 bottom-0 end-0 mx-2 mb-2" href="index.html">Inicio</a>
   </div>
 
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../node_modules/electron-virtual-keyboard/src/client.js"></script>
   <script src="../teclado.js"></script>
   <script src="../js/time.js"></script>
-  <!-- <script src="../js/audio.js"></script> -->
+  <script src="../js/audio.js"></script>
   <script src="../js/data-check.js"></script>
 </body>
 </html>

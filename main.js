@@ -5,13 +5,13 @@ const axios = require('axios');
 const { print } = require('pdf-to-printer')
 const VirtualKeyboard = require('electron-virtual-keyboard')
 const filePath = path.join(__dirname, 'config.json');
-let index;
 
+let index;
 const createindexWindow = () => {
     index = new BrowserWindow({
     title: 'eDoxSat',
-    width: 1024,
-    height: 768,
+    width: 800,
+    height: 600,
     kiosk: true,
     webPreferences: {
       nodeIntegration: true,
@@ -25,6 +25,16 @@ const createindexWindow = () => {
   index.removeMenu()
 }
 
+const errorwindow = () => {
+    let error = new BrowserWindow({
+      width: 450,
+      height: 200,
+      show:true
+    })
+    error.loadFile('./view/error.html');
+    error.removeMenu();
+}
+
 const createprintWindow = (url) => {
     const printpdf = new BrowserWindow({
       width: 800,
@@ -34,16 +44,52 @@ const createprintWindow = (url) => {
     printpdf.loadURL(url)
     // se imprime automaticamente sin mostrar la ventana de impresion
     const timestamp = Date.now();
+    const carpeta = 'facturas';
     const outputPath =  path.join(__dirname, 'facturas/')
     const pdfPath = `${outputPath}factura_${timestamp}.pdf`;
-    axios.get(url, { responseType: 'arraybuffer' })
-    .then(response => {
-      fs.writeFileSync(pdfPath, Buffer.from(response.data));
-      print(pdfPath, {
-        silent: true,
-        printBackground: true,
-        copies: 1
-      })
+    if (!fs.existsSync(carpeta)) {
+      try {
+          fs.mkdirSync(carpeta);
+          axios.get(url, { responseType: 'arraybuffer' })
+          .then(response => {
+            fs.writeFileSync(pdfPath, Buffer.from(response.data));//escribe el archivo 
+            print(pdfPath, {
+              silent: true,
+              printBackground: true,
+              copies: 1
+            })
+            .then(() => {
+              console.log('La impresion se ha completado.');
+              try {
+                fs.unlinkSync(pdfPath)            
+                console.log('Archivo borrado correctamente')
+              } catch (error) {
+                console.log('Error al borrar el archivo'. error)
+              }
+            })
+            .catch(error => {
+              errorwindow()
+              console.error('Error al imprimir:', error);
+            });
+          })
+          .catch(error => {
+            errorwindow()
+            console.error('Error al descargar el archivo PDF:', error);
+          });
+      } catch (error) {
+        errorwindow()
+        console.error(`Error al crear la carpeta "${carpeta}":`, error);
+      }
+
+    } else {
+      axios.get(url, { responseType: 'arraybuffer' })
+      .then(response => {
+        fs.writeFileSync(pdfPath, Buffer.from(response.data));//escribe el archivo 
+        print(pdfPath, {
+          silent: true,
+          printBackground: true,
+          copies: 1
+        })
         .then(() => {
           console.log('La impresion se ha completado.');
           try {
@@ -54,12 +100,16 @@ const createprintWindow = (url) => {
           }
         })
         .catch(error => {
+          errorwindow()
           console.error('Error al imprimir:', error);
         });
-    })
-    .catch(error => {
-      console.error('Error al descargar el archivo PDF:', error);
-    });
+      })
+      .catch(error => {
+        errorwindow()
+        console.error('Error al descargar el archivo PDF:', error);
+      });
+
+    }
 }
 
 app.whenReady().then(() => { 
