@@ -44,7 +44,7 @@ const createprintWindow = (url) => {
     printpdf.loadURL(url)
     // se imprime automaticamente sin mostrar la ventana de impresion
     const timestamp = Date.now();
-    const carpeta = 'facturas';
+    const carpeta = path.join(__dirname,'facturas');
     const outputPath =  path.join(__dirname, 'facturas/')
     const pdfPath = `${outputPath}factura_${timestamp}.pdf`;
     if (!fs.existsSync(carpeta)) {
