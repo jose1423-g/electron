@@ -128,6 +128,7 @@ if (referencia) {
                 a_ticket_clean.push(referencia_clean)
                 show_tickets_clean()
             }  
+            //show ticket for the client
             datacheck()    
             referencia.value = "";      
         }
